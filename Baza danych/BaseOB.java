@@ -1,13 +1,26 @@
-package pierwszyProjekt;
-
+package com.example.ob; /**
+ * Created by bidzis on 2016-03-18.
+ */
 import java.util.Date;
+public class BaseOB {
 
-public class BaseOB {//wszystkie klasy musz¹ dzidziczyæ potem.
-	private Long id;
-	private Date dataUtworzenia = new Date();
-	private Date dataModyfikacji; 
-	//do tegoo setery oraz 
-	//enum Etyp Eytyp . java - dopisaæ
-	//wszystkie klasy z przypisaniem OB to znak, ¿e to s¹ z bazy danych .
-	//Interfejsy z du¿ej litery I
+    protected long id;
+    private Date dataUtworzenia;
+    private Date dataModyfikacji;
+
+    public long getID() {
+        return id;
+    }
+
+    public void setID(long id) {
+        this.id = id;
+    }
+
+    public Date getDataModyfikacji() {
+        return dataModyfikacji;
+    }
+
+    public void setDataModyfikacji(Date dataModyfikacji) {
+        this.dataModyfikacji = dataModyfikacji;
+    }
 }

@@ -1,4 +1,7 @@
 package com.uwm.projektz.ob;
+
+import com.uwm.projektz.enums.TicketType;
+
 /**
  * Created by wojni on 11.03.2016.
  */

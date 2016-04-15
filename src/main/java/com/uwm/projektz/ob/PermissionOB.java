@@ -1,23 +1,28 @@
 package com.uwm.projektz.ob;
+
+import javax.persistence.*;
+import java.util.List;
+
 /**
  * Created by wojni on 11.03.2016.
  */
+@Entity
+@Table(name = "permissions")
+@SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_PERMISSION_ID")
 public class PermissionOB extends BaseOB{
     String name;
-    RoleOB role;
-
-
-    public PermissionOB(String name, RoleOB role)
-    {
-        this.name = name;
-        this.role = role;
+    public PermissionOB() {
     }
 
-    //getters
-    public String getPermissionName () { return name;}
-    public RoleOB getPermissionRole () {return role;}
+    public PermissionOB(String name) {
+        this.name = name;
+    }
 
-    //setters
-    public void setPermissionName (String name) {this.name = name;}
-    public void setPermissionRole (RoleOB role) {this.role = role;}
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

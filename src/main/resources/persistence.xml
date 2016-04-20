@@ -4,14 +4,14 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
 				 http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd" version="2.0">
     <persistence-unit name="default">
-        <class>com.uwm.projektz.ob.BinaryOB</class>
-        <class>com.uwm.projektz.ob.UserOB</class>
-        <class>com.uwm.projektz.ob.ProjectOB</class>
-        <class>com.uwm.projektz.ob.RoleOB</class>
-        <class>com.uwm.projektz.ob.PermissionOB</class>
-        <class>com.uwm.projektz.ob.PriorityOB</class>
-        <class>com.uwm.projektz.ob.AttachmentOB</class>
-        <class>com.uwm.projektz.ob.HistoryOB</class>
-        <class>com.uwm.projektz.ob.TicketOB</class>
+        <class>com.uwm.projektz.binary.ob.BinaryOB</class>
+        <class>com.uwm.projektz.user.ob.UserOB</class>
+        <class>com.uwm.projektz.project.ob.ProjectOB</class>
+        <class>com.uwm.projektz.role.ob.RoleOB</class>
+        <class>com.uwm.projektz.permission.ob.PermissionOB</class>
+        <class>com.uwm.projektz.priority.ob.PriorityOB</class>
+        <class>com.uwm.projektz.attachment.ob.AttachmentOB</class>
+        <class>com.uwm.projektz.history.ob.HistoryOB</class>
+        <class>com.uwm.projektz.ticket.ob.TicketOB</class>
     </persistence-unit>
 </persistence>

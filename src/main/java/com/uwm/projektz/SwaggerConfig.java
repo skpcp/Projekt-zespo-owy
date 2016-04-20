@@ -22,11 +22,11 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).select().paths(apiPaths()).build();
     }
     private Predicate<String> apiPaths() {
-        return or(regex("/etask/.*"));
+        return or(regex("/projektz/.*"));
     }
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder().title("Projekt Zespołowy").description("System Zgłaszania Tasków").termsOfServiceUrl("Terms of Service")
-                .contact("!!!!!!!!").license("Apache License Version 2.0")
+                .contact("Students of UWM: WMII").license("Apache License Version 2.0")
                 .licenseUrl("https://github.com/springfox/springfox/blob/master/LICENSE").version("2.0").build();
     }
 }

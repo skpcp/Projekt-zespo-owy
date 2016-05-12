@@ -56,10 +56,18 @@ public class UserConverter {
 
 
     public static UserDTOWithoutMd5Pass converterUserOBtoUserDTOMd5pass(UserOB aUserOB){
-        return new UserDTOWithoutMd5Pass(aUserOB.getId(),aUserOB.getTechDate(),aUserOB.getName(),aUserOB.getSurname(),aUserOB.getEmail(),aUserOB.getLogin(),aUserOB.getActive(),
+        return new UserDTOWithoutMd5Pass(
+                aUserOB.getId(),
+                aUserOB.getTechDate(),
+                aUserOB.getName(),
+                aUserOB.getSurname(),
+                aUserOB.getEmail(),
+                aUserOB.getLogin(),
+                aUserOB.getActive(),
                 RoleConverter.converterRoleOBtoDTO(aUserOB.getRole()),
                 ProjectConverter.converterProjectListOBtoDTO(aUserOB.getProjects()),
-                PermissionConverter.converterPermissionListOBtoDTO(aUserOB.getPermissions()));
+                PermissionConverter.converterPermissionListOBtoDTO(aUserOB.getPermissions())
+        );
     }
 
     public static UserOB converterUserDTOWithoutMd5PassToUserOB(UserDTOWithoutMd5Pass aUserDTOWithoutMd5Pass){

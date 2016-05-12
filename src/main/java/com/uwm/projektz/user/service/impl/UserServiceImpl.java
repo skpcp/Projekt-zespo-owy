@@ -111,11 +111,14 @@ public class UserServiceImpl implements IUserService {
         UserOB userOB = aUserDTO.getLogin() == null ? null : userRepository.findUserByLogin(aUserDTO.getLogin());
         if(userOB == null){
             //zapisz nowego usera
-            userOB = new UserOB(aUserDTO.getName(),aUserDTO.getSurname(),aUserDTO.getEmail(),aUserDTO.getLogin(),aUserDTO.getMd5pass());
+            userOB = new UserOB(aUserDTO.getName(),
+                    aUserDTO.getSurname(),
+                    aUserDTO.getEmail(),
+                    aUserDTO.getLogin(),
+                    aUserDTO.getMd5pass()
+            );
             userOB.setRole(roleRepository.findRoleByName("USER"));
             userOB.setActive(true);
-            userOB.setId(0L);
-            userOB.setTechDate(new Date());
             return UserConverter.converterUserOBtoUserDTOMd5pass(userRepository.save(userOB));
         }
         //w przeciwnym wypadku zmien edycja

@@ -4,6 +4,7 @@ import com.uwm.projektz.base.dto.BaseDTO;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.role.dto.RoleDTO;
+import io.swagger.annotations.ApiModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by Tomasz Komoszeski on 2016-05-12.
  */
+@ApiModel
 public class UserDTOWithoutMd5Pass extends BaseDTO {
     String name;
     String surname;

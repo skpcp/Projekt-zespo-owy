@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 @Service
-@Transactional(noRollbackFor = MyServerException.class)
+@Transactional
 public class UserServiceImpl implements IUserService {
 
     @Autowired
@@ -39,6 +39,12 @@ public class UserServiceImpl implements IUserService {
 
     @Autowired
     IRoleRepository roleRepository;
+
+    @Autowired
+    IPermissionRepository permissionRepository;
+
+    @Autowired
+    IProjectRepository projectRepository;
 
     @Override
     public void updateUserActivity(Long aId,Boolean aActive) throws MyServerException {
@@ -108,9 +114,8 @@ public class UserServiceImpl implements IUserService {
             userOB = new UserOB(aUserDTO.getName(),aUserDTO.getSurname(),aUserDTO.getEmail(),aUserDTO.getLogin(),aUserDTO.getMd5pass());
             userOB.setRole(roleRepository.findRoleByName("USER"));
             userOB.setActive(true);
-            userOB.setPermissions(null);
-            userOB.setProjects(null);
-
+            userOB.setId(0L);
+            userOB.setTechDate(new Date());
             return UserConverter.converterUserOBtoUserDTOMd5pass(userRepository.save(userOB));
         }
         //w przeciwnym wypadku zmien edycja
@@ -146,7 +151,14 @@ public class UserServiceImpl implements IUserService {
     public UserDTO updatePermissionsListForUser(UserDTOPermissions aUserDTO) throws MyServerException {
         UserOB user = aUserDTO.getId() == null ? null : userRepository.findOne(aUserDTO.getId());
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        List<PermissionOB> permissions = PermissionConverter.converterPermissionListDTOtoOB(aUserDTO.getPermissions());
+        List<PermissionOB> permissions = new ArrayList<>();
+        if((aUserDTO.getPermissions() == null)) throw new MyServerException("User permissions not found",HttpStatus.NOT_FOUND);
+        for(PermissionDTO permissionDTO : aUserDTO.getPermissions())
+        {
+            PermissionOB permissionOB = permissionDTO.getId() == null ? null : permissionRepository.findOne(permissionDTO.getId());
+            if(permissionOB == null) throw  new MyServerException("Permission not found",HttpStatus.NOT_FOUND);
+            permissions.add(permissionOB);
+        }
         user.setPermissions(permissions);
         return UserConverter.converterUserOBtoDTO(userRepository.save(user));
     }
@@ -155,7 +167,12 @@ public class UserServiceImpl implements IUserService {
     public void updateProjectListForUser(UserDTOProjects aUserDTO) throws MyServerException {
         UserOB user = userRepository.findOne(aUserDTO.getId());
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        List<ProjectOB> projects = ProjectConverter.converterProjectListDTOtoOB(aUserDTO.getProjects());
+        List<ProjectOB> projects = new ArrayList<>();
+        if(aUserDTO.getProjects()== null) throw new MyServerException("Projects not found",HttpStatus.NOT_FOUND);
+        for(ProjectDTO projectDTO : aUserDTO.getProjects()){
+            ProjectOB projectOB  = projectDTO.getId() == null ? null : projectRepository.findOne(projectDTO.getId());
+            if(projectOB == null) throw new MyServerException("Project not found",HttpStatus.NOT_FOUND);
+        }
         user.setProjects(projects);
         userRepository.save(user);
     }

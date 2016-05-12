@@ -4,6 +4,7 @@ import com.uwm.projektz.base.ob.BaseOB;
 import com.uwm.projektz.permission.ob.PermissionOB;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,8 +17,12 @@ import java.util.List;
 public class RoleOB extends BaseOB {
     String name;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name ="ROLE_ID",referencedColumnName = "ID")
-    List<PermissionOB> permissions;
+    @JoinTable(
+            name ="ROLES_PERMISSIONS",
+            joinColumns = @JoinColumn(name="ROLE_ID",referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PROJ_ID",referencedColumnName = "ID")
+            )
+    List<PermissionOB> permissions = new ArrayList<>();
 
 
     public RoleOB(){}

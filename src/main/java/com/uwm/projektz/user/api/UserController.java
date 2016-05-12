@@ -168,9 +168,17 @@ public class UserController {
 
     }
 
-//    @RequestMapping(value="/changeUserRole/{id},{role.name}",method = RequestMethod.POST)
-//    @ResponseBody
-//    public ResponseEntity<Void> changeUserRole()
-//
+    @RequestMapping(value="/changeUserRole/{id},{role.name}",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Void> changeUserRole(@PathVariable("id") Long aId,@PathVariable("role.name") String aName){
+        try {
+            userService.updateUserRole(aId, aName);
+            return new ResponseEntity<Void>(HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<Void>(e.getHeaders(),e.getStatus());
+        }
+
+    }
+
 
 }

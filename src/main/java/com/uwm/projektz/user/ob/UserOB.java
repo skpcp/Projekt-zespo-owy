@@ -28,10 +28,18 @@ public class UserOB extends BaseOB {
     @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
     RoleOB role;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PROJECT_ID", referencedColumnName = "ID")
+    @JoinTable(
+            name = "USER_PROJECT",
+            joinColumns = @JoinColumn(name ="USER_ID", referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PROJECT_ID",referencedColumnName = "ID")
+    )
     List<ProjectOB> projects = new ArrayList<>();
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", referencedColumnName = "ID")
+    @JoinTable(
+            name = "USER_PERMISSION",
+            joinColumns = @JoinColumn(name ="USER_ID",referencedColumnName = "ID"),
+            inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID",referencedColumnName = "ID")
+    )
     List<PermissionOB> permissions = new ArrayList<>();
 
     public UserOB() {

@@ -12,6 +12,9 @@ public class BaseDTO implements Serializable {
         this.techDate = techDate;
     }
 
+    public BaseDTO() {
+    }
+
     public Date getTechDate() {
         return techDate;
     }

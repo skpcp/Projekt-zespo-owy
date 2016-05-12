@@ -1,21 +1,21 @@
 package com.uwm.projektz.ticket.api;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.history.dto.HistoryDTO;
 import com.uwm.projektz.priority.dto.PriorityDTO;
-import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.ticket.dto.TicketDTO;
+import com.uwm.projektz.ticket.dto.TicketDTOWithoutHistoriesAttachments;
 import com.uwm.projektz.ticket.service.ITicketService;
-import com.uwm.projektz.user.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.ws.rs.Path;
+import java.io.File;
 import java.util.List;
 
 
@@ -55,22 +55,22 @@ public class TicketController {
         return new ResponseEntity<>(ticketService.findByType(aType), HttpStatus.OK);
     }
 
-    @RequestMapping(value="/getTicketstByUser/{user}",method = RequestMethod.GET)
+    @RequestMapping(value="/getTicketstByUser/{user.id}",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<TicketDTO>> findTicketsByUser(@RequestBody UserDTO aUserDTO){
-        return new ResponseEntity<>(ticketService.findTicketsByUser(aUserDTO),HttpStatus.OK);
+    public ResponseEntity<List<TicketDTO>> findTicketsByUser(@PathVariable("user.id") Long aId){
+        return new ResponseEntity<>(ticketService.findTicketsByUser(aId),HttpStatus.OK);
     }
 
-    @RequestMapping(value="/getTicketsByProject/{project}",method = RequestMethod.GET)
+    @RequestMapping(value="/getTicketsByProject/{project.id}",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<TicketDTO>> findTicketsByProject(@RequestBody ProjectDTO aProjectDTO){
-        return new ResponseEntity<>(ticketService.findTicketsByProjects(aProjectDTO),HttpStatus.OK);
+    public ResponseEntity<List<TicketDTO>> findTicketsByProject(@PathVariable("project.id") Long aId ){
+        return new ResponseEntity<>(ticketService.findTicketsByProject(aId),HttpStatus.OK);
     }
 
-    @RequestMapping(value="/getTicketsByPriority/{priority}",method = RequestMethod.GET)
+    @RequestMapping(value="/getTicketsByPriority/{priority.id}",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<TicketDTO>> findTicketsByPriority(@RequestBody PriorityDTO aPriorityDTO){
-        return new ResponseEntity<>(ticketService.findTicketsByPriority(aPriorityDTO),HttpStatus.OK);
+    public ResponseEntity<List<TicketDTO>> findTicketsByPriority(@PathVariable Long aId){
+        return new ResponseEntity<>(ticketService.findTicketsByPriority(aId),HttpStatus.OK);
     }
 
 
@@ -78,8 +78,12 @@ public class TicketController {
 
     @RequestMapping(value="/saveTicket",method = RequestMethod.POST, consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<TicketDTO> saveTicket(@RequestBody TicketDTO aTicketDTO){
-        return new ResponseEntity<>(ticketService.saveTicket(aTicketDTO),HttpStatus.OK);
+    public ResponseEntity<TicketDTO> saveTicket(@RequestBody TicketDTOWithoutHistoriesAttachments aTicketDTO){
+        try {
+            return new ResponseEntity<>(ticketService.saveTicket(aTicketDTO), HttpStatus.OK);
+        }catch (MyServerException e){
+            return  new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
     }
 
     //update
@@ -92,7 +96,7 @@ public class TicketController {
 
     @RequestMapping(value="/addAttachmentToTicket/{id}", method = RequestMethod.POST,consumes = "aplication/json",produces = "appliaction/json")
     @ResponseBody
-    public ResponseEntity<TicketDTO> updateAttachmentForTciket(@PathVariable("id") Long aId, @RequestBody AttachmentDTO aAttachmentDTO){
+    public ResponseEntity<TicketDTO> updateAttachmentForTciket(@PathVariable("id") Long aId, @RequestBody AttachmentDTO aAttachmentDTO,File aFile){
         return new ResponseEntity<>(ticketService.updateAttachemntForTicket(aId, aAttachmentDTO),HttpStatus.OK);
     }
 
@@ -108,6 +112,7 @@ public class TicketController {
        return new ResponseEntity<>(ticketService.updateTicketTypeAndKind(aId,aKind,aType),HttpStatus.OK);
 
     }
+
 
 
     @RequestMapping(value="/removeTicketById/{id}",method = RequestMethod.DELETE)

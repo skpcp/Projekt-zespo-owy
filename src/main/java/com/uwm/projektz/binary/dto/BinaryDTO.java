@@ -13,6 +13,8 @@ import java.util.Date;
 public class BinaryDTO extends BaseDTO {
     byte[] binary;
 
+    public BinaryDTO() {
+    }
 
     public BinaryDTO(Long id, Date techdate, byte[] binary)
     {

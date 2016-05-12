@@ -18,6 +18,9 @@ public class ProjectDTO extends BaseDTO {
     PriorityDTO priority;
 
 
+    public ProjectDTO() {
+    }
+
     public ProjectDTO(Long id, Date techdate, String name, String desc, String version, PriorityDTO priority)
     {
         super(id,techdate);

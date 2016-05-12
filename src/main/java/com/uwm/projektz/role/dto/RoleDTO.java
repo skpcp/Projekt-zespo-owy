@@ -12,6 +12,9 @@ public class RoleDTO extends BaseDTO {
     String name;
     List<PermissionDTO> permissions;
 
+    public RoleDTO() {
+    }
+
     public RoleDTO(Long id, Date techdate, String Name, List<PermissionDTO> permissions)
     {
         super(id,techdate);

@@ -1,10 +1,13 @@
 package com.uwm.projektz.history.ob;
+
+import com.uwm.projektz.attachment.ob.AttachmentOB;
 import com.uwm.projektz.base.ob.BaseOB;
 import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.user.ob.UserOB;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by wojni on 10.03.2016.
@@ -18,16 +21,29 @@ public class HistoryOB extends BaseOB {
     @JoinColumn(name = "USER_ID" , referencedColumnName = "ID")
     UserOB user;
     String description;
+    @Column(columnDefinition = "DATE")
     Date date;
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "HISTORY_ID", referencedColumnName = "ID")
+    List<AttachmentOB> attachments;
 
-    public HistoryOB() {
-    }
+    public HistoryOB(){}
 
-    public HistoryOB(Type type, UserOB user, String description, Date date) {
+    public HistoryOB(Type type, UserOB user, String description, Date date, List<AttachmentOB> attachments) {
         this.type = type;
         this.user = user;
         this.description = description;
         this.date = date;
+        this.attachments = attachments;
+    }
+
+    public HistoryOB(Long id, Date techDate, Type type, UserOB user, String description, Date date, List<AttachmentOB> attachments) {
+        super(id, techDate);
+        this.type = type;
+        this.user = user;
+        this.description = description;
+        this.date = date;
+        this.attachments = attachments;
     }
 
     public Type getType() {
@@ -60,5 +76,13 @@ public class HistoryOB extends BaseOB {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<AttachmentOB> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<AttachmentOB> attachments) {
+        this.attachments = attachments;
     }
 }

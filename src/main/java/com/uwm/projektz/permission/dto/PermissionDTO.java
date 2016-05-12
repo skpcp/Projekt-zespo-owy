@@ -9,6 +9,8 @@ import java.util.Date;
 public class PermissionDTO extends BaseDTO {
     String name;
 
+    public PermissionDTO() {
+    }
 
     public PermissionDTO(Long id, Date techdate, String name)
     {

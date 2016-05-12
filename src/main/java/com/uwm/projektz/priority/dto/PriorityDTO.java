@@ -14,6 +14,8 @@ public class PriorityDTO extends BaseDTO {
     String name;
     String responseTime;
 
+    public PriorityDTO() {
+    }
 
     public PriorityDTO(Long id, Date techdate, String name, String responseTime)
     {

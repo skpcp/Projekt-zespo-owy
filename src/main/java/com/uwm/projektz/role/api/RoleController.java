@@ -40,17 +40,11 @@ public class RoleController {
         return new ResponseEntity<>(roleService.findByName(aName),HttpStatus.OK);
     }
 
-    @RequestMapping(value ="/saveRole", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<RoleDTO> saveRole(@RequestBody RoleDTO aRole){
-        return new ResponseEntity<>(roleService.saveRole(aRole),HttpStatus.OK);
-    }
-
-    @RequestMapping(value ="/addPermissionToRole", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
-    @ResponseBody
-    public ResponseEntity<RoleDTO> updatePermissionsForRole(@RequestBody PermissionDTO aPermissionDTO){
-        return new ResponseEntity<>(roleService.updatePermissionForRole(aPermissionDTO),HttpStatus.OK);
-    }
+//    @RequestMapping(value ="/saveRole", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
+//    @ResponseBody
+//    public ResponseEntity<RoleDTO> saveRole(@RequestBody RoleDTO aRole){
+//        return new ResponseEntity<>(roleService.saveRole(aRole),HttpStatus.OK);
+//    }
 
     @RequestMapping(value= "/removeRoleById/{id}",method = RequestMethod.DELETE)
     @ResponseBody

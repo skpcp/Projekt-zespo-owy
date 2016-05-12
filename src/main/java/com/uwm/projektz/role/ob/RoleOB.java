@@ -4,6 +4,7 @@ import com.uwm.projektz.base.ob.BaseOB;
 import com.uwm.projektz.permission.ob.PermissionOB;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,10 +20,15 @@ public class RoleOB extends BaseOB {
     List<PermissionOB> permissions;
 
 
-    public RoleOB() {
-    }
+    public RoleOB(){}
 
     public RoleOB(String name, List<PermissionOB> permissions) {
+        this.name = name;
+        this.permissions = permissions;
+    }
+
+    public RoleOB(Long id, Date techdate, String name, List<PermissionOB> permissions) {
+        super(id,techdate);
         this.name = name;
         this.permissions = permissions;
     }

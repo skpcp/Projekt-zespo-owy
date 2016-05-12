@@ -15,7 +15,7 @@ import java.util.List;
  */
 @RestController
 @Transactional
-@RequestMapping(name ="/projektz/permissions")
+@RequestMapping(value ="/projektz/permissions")
 public class PermissionController {
 
     @Autowired

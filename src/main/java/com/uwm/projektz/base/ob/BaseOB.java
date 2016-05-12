@@ -17,7 +17,11 @@ public class BaseOB implements Serializable{
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date techDate;
 
-    public BaseOB() {
+    public BaseOB(){}
+
+    public BaseOB(Long id, Date techDate) {
+        this.id = id;
+        this.techDate = techDate;
     }
 
     public Long getId() {

@@ -1,7 +1,7 @@
 package com.uwm.projektz.user.dto;
 
 import com.uwm.projektz.base.dto.BaseDTO;
-import com.uwm.projektz.permission.ob.PermissionOB;
+import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.role.dto.RoleDTO;
 import io.swagger.annotations.ApiModel;
@@ -20,11 +20,12 @@ public class UserDTO extends BaseDTO {
     Boolean active;
     RoleDTO role;
     List<ProjectDTO> projects = new ArrayList<>();
-    List<PermissionOB> permissions;
+    List<PermissionDTO> permissions =  new ArrayList<>();
 
+    public UserDTO() {
+    }
 
-
-    public UserDTO(Long id, Date techdate, String name, String surname, String email, String login, String md5pass, Boolean active, RoleDTO role, List<ProjectDTO> projects, List<PermissionOB> permissions) {
+    public UserDTO(Long id, Date techdate, String name, String surname, String email, String login, String md5pass, Boolean active, RoleDTO role, List<ProjectDTO> projects, List<PermissionDTO> permissions) {
         super(id,techdate);
         this.name = name;
         this.surname = surname;
@@ -101,11 +102,11 @@ public class UserDTO extends BaseDTO {
         this.projects = projects;
     }
 
-    public List<PermissionOB> getPermissions() {
+    public List<PermissionDTO> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<PermissionOB> permissions) {
+    public void setPermissions(List<PermissionDTO> permissions) {
         this.permissions = permissions;
     }
 }

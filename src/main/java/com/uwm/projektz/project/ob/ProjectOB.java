@@ -6,6 +6,7 @@ import com.uwm.projektz.base.ob.BaseOB;
 import com.uwm.projektz.priority.ob.PriorityOB;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -23,10 +24,17 @@ public class ProjectOB extends BaseOB {
     @JoinColumn(name ="PRIORITY_ID", referencedColumnName = "ID")
     PriorityOB priority;
 
-    public ProjectOB() {
-    }
+    public ProjectOB(){}
 
     public ProjectOB(String name, String descritpion, String version, PriorityOB priority) {
+        this.name = name;
+        this.descritpion = descritpion;
+        this.version = version;
+        this.priority = priority;
+    }
+
+    public ProjectOB(Long id, Date techdate, String name, String descritpion, String version, PriorityOB priority) {
+        super(id,techdate);
         this.name = name;
         this.descritpion = descritpion;
         this.version = version;

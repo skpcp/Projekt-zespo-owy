@@ -10,6 +10,7 @@ import com.uwm.projektz.project.ob.ProjectOB;
 import com.uwm.projektz.user.ob.UserOB;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,18 +32,30 @@ public class TicketOB extends BaseOB {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROJECT_ID" , referencedColumnName = "ID")
     ProjectOB project;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinColumn(name = "TICKET_ID" , referencedColumnName = "ID")
     List<HistoryOB> histories;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "TICKET_ID" , referencedColumnName = "ID")
     List<AttachmentOB> attachments;
 
 
-    public TicketOB() {
-    }
+
+    public TicketOB(){}
 
     public TicketOB(TicketType kind, Type type, String description, UserOB user, PriorityOB priority, ProjectOB project, List<HistoryOB> histories, List<AttachmentOB> attachments) {
+        this.kind = kind;
+        this.type = type;
+        this.description = description;
+        this.user = user;
+        this.priority = priority;
+        this.project = project;
+        this.histories = histories;
+        this.attachments = attachments;
+    }
+
+    public TicketOB(Long id, Date techdate, TicketType kind, Type type, String description, UserOB user, PriorityOB priority, ProjectOB project, List<HistoryOB> histories, List<AttachmentOB> attachments) {
+        super(id,techdate);
         this.kind = kind;
         this.type = type;
         this.description = description;

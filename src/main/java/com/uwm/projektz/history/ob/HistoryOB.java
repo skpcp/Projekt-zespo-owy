@@ -6,6 +6,7 @@ import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.user.ob.UserOB;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,16 +17,16 @@ import java.util.List;
 @Table(name = "histories")
 @SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_HISTORY_ID")
 public class HistoryOB extends BaseOB {
-    Type type;
+    private Type type;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID" , referencedColumnName = "ID")
-    UserOB user;
-    String description;
+    @JoinColumn(name = "USER_ID" , referencedColumnName = "ID",nullable = false)
+    private UserOB user;
+    private String description;
     @Column(columnDefinition = "DATE")
-    Date date;
+    private Date date;
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "HISTORY_ID", referencedColumnName = "ID")
-    List<AttachmentOB> attachments;
+    @JoinColumn(name = "HISTORY_ID", referencedColumnName = "ID",nullable = true)
+    private List<AttachmentOB> attachments;
 
     public HistoryOB(){}
 
@@ -37,13 +38,12 @@ public class HistoryOB extends BaseOB {
         this.attachments = attachments;
     }
 
-    public HistoryOB(Long id, Date techDate, Type type, UserOB user, String description, Date date, List<AttachmentOB> attachments) {
-        super(id, techDate);
+    public HistoryOB(Type type, String description, Date date) {
         this.type = type;
-        this.user = user;
         this.description = description;
         this.date = date;
-        this.attachments = attachments;
+        this.attachments = new ArrayList<>();
+        this.user = null;
     }
 
     public Type getType() {

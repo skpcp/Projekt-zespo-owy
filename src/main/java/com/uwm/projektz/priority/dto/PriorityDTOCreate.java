@@ -1,26 +1,21 @@
 package com.uwm.projektz.priority.dto;
 
-import com.uwm.projektz.base.dto.BaseDTO;
 import io.swagger.annotations.ApiModel;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * Created by wojni on 10.03.2016.
+ * Created by Tomasz Komoszeski on 2016-05-14.
  */
-
 @ApiModel
-public class PriorityDTO extends BaseDTO {
-   private String name;
-   private String responseTime;
+public class PriorityDTOCreate implements Serializable {
+    private String name;
+    private String responseTime;
 
-    public PriorityDTO(Long id, Date techDate, String name, String responseTime) {
-        super(id, techDate);
-        this.name = name;
-        this.responseTime = responseTime;
+    public PriorityDTOCreate() {
     }
 
-    public PriorityDTO(String name, String responseTime) {
+    public PriorityDTOCreate(String name, String responseTime) {
         this.name = name;
         this.responseTime = responseTime;
     }

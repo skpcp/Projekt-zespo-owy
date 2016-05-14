@@ -1,17 +1,19 @@
 package com.uwm.projektz.ticket.dto;
 
+
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
+
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
- * Created by Tomasz Komoszeski on 2016-05-12.
+ * Created by Tomasz Komoszeski on 2016-05-14.
  */
-
 @ApiModel
-public class TicketDTOWithoutHistoriesAttachments implements Serializable {
+public class TicketDTOAttachments implements Serializable {
     private Long id;
     private TicketType kind;
     private Type type;
@@ -19,8 +21,20 @@ public class TicketDTOWithoutHistoriesAttachments implements Serializable {
     private String user;
     private String priority;
     private String project;
+    private List<Long> attachments;
 
-    public TicketDTOWithoutHistoriesAttachments() {
+    public TicketDTOAttachments() {
+    }
+
+    public TicketDTOAttachments(Long id, TicketType kind, Type type, String description, String user, String priority, String project, List<Long> attachments) {
+        this.id = id;
+        this.kind = kind;
+        this.type = type;
+        this.description = description;
+        this.user = user;
+        this.priority = priority;
+        this.project = project;
+        this.attachments = attachments;
     }
 
     public Long getId() {
@@ -79,13 +93,11 @@ public class TicketDTOWithoutHistoriesAttachments implements Serializable {
         this.project = project;
     }
 
-    public TicketDTOWithoutHistoriesAttachments(Long id, TicketType kind, Type type, String description, String user, String priority, String project) {
-        this.id = id;
-        this.kind = kind;
-        this.type = type;
-        this.description = description;
-        this.user = user;
-        this.priority = priority;
-        this.project = project;
+    public List<Long> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Long> attachments) {
+        this.attachments = attachments;
     }
 }

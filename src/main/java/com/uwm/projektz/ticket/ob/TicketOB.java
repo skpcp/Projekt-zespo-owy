@@ -10,6 +10,7 @@ import com.uwm.projektz.project.ob.ProjectOB;
 import com.uwm.projektz.user.ob.UserOB;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -20,42 +21,34 @@ import java.util.List;
 @Table(name = "tickets")
 @SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_TICKET_ID")
 public class TicketOB extends BaseOB {
-    TicketType kind;
-    Type type;
-    String description;
+    private TicketType kind;
+    private Type type;
+    private String description;
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID" , referencedColumnName = "ID")
-    UserOB user;
+    private UserOB user;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRIORITY_ID" , referencedColumnName = "ID")
-    PriorityOB priority;
+    private PriorityOB priority;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PROJECT_ID" , referencedColumnName = "ID")
-    ProjectOB project;
+    private ProjectOB project;
     @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.REMOVE)
     @JoinColumn(name = "TICKET_ID" , referencedColumnName = "ID")
-    List<HistoryOB> histories;
+    private List<HistoryOB> histories = new ArrayList<>();
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "TICKET_ID" , referencedColumnName = "ID")
-    List<AttachmentOB> attachments;
-
-
+    private List<AttachmentOB> attachments = new ArrayList<>();
 
     public TicketOB(){}
 
-    public TicketOB(TicketType kind, Type type, String description, UserOB user, PriorityOB priority, ProjectOB project, List<HistoryOB> histories, List<AttachmentOB> attachments) {
+    public TicketOB(TicketType kind, Type type, String description) {
         this.kind = kind;
         this.type = type;
         this.description = description;
-        this.user = user;
-        this.priority = priority;
-        this.project = project;
-        this.histories = histories;
-        this.attachments = attachments;
     }
 
-    public TicketOB(Long id, Date techdate, TicketType kind, Type type, String description, UserOB user, PriorityOB priority, ProjectOB project, List<HistoryOB> histories, List<AttachmentOB> attachments) {
-        super(id,techdate);
+    public TicketOB(TicketType kind, Type type, String description, UserOB user, PriorityOB priority, ProjectOB project, List<HistoryOB> histories, List<AttachmentOB> attachments) {
         this.kind = kind;
         this.type = type;
         this.description = description;

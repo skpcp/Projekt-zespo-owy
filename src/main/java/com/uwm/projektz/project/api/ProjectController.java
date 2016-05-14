@@ -1,11 +1,11 @@
 package com.uwm.projektz.project.api;
 
 import com.uwm.projektz.MyServerException;
-import com.uwm.projektz.priority.dto.PriorityDTO;
 import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.project.dto.ProjectDTOCreate;
+import com.uwm.projektz.project.dto.ProjectDTOName;
 import com.uwm.projektz.project.service.IProjectService;
-import com.uwm.projektz.user.dto.UserDTO;
+import com.uwm.projektz.user.dto.UserDTOLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,6 @@ import java.util.List;
  */
 
 @RestController
-@Transactional
 @RequestMapping("/projektz/projects")
 public class ProjectController {
 
@@ -63,17 +62,23 @@ public class ProjectController {
     }
 
 
-    @RequestMapping(value="/removeProject/{id}", method = RequestMethod.DELETE)
+    @RequestMapping(value="/removeProject/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<ProjectDTO> deleteProjectById(@PathVariable("id") Long aId){
+    public ResponseEntity<Void> deleteProjectById(@PathVariable("id") Long aId){
         projectService.deleteProjectById(aId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-//    @RequestMapping(value = "/getUserProjects",method = RequestMethod.GET)
-//    @ResponseBody
-//    public ResponseEntity<List<ProjectDTO>> findProjectsUser(@PathVariable("id") Long aId){
-//        return new ResponseEntity<>(projectService.findUserProjects(aId),HttpStatus.OK);
-//    }
+    @RequestMapping(value = "/changeNameForProject",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<ProjectDTO> updateProjectName(@RequestBody ProjectDTOName aProjectDTO){
+        try{
+            return new ResponseEntity<>(projectService.changeNameOfProject(aProjectDTO),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+    }
+
+
 
 }

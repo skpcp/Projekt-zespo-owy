@@ -1,8 +1,6 @@
 package com.uwm.projektz.user.service;
 
 import com.uwm.projektz.MyServerException;
-import com.uwm.projektz.permission.dto.PermissionDTO;
-import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.user.dto.*;
 
 import java.util.List;
@@ -14,26 +12,26 @@ import java.util.List;
 public interface IUserService {
 
     //CREATE & EDIT
-    UserDTOWithoutMd5Pass saveUser(UserDTOCreate aUserDTO);
+    UserDTO saveUser(UserDTOCreate aUserDTO);
 
     //READ
-    UserDTOWithoutMd5Pass findUserById(Long aId);
-    List<UserDTOWithoutMd5Pass> findAllUsers();
-    List<UserDTOWithoutMd5Pass> findUsersByActivity(Boolean aActive);
-    UserDTOWithoutMd5Pass findUserByLogin(String aLogin);
-    UserDTOWithoutMd5Pass findUserByEmail(String aEmail);
-    List<UserDTOWithoutMd5Pass> findUsersByName(String aName);
-    List<UserDTOWithoutMd5Pass> findUsersBySurname(String aSurname);
-    List<UserDTOWithoutMd5Pass> findUsersByNameAndSurname(String aName,String aSurname);
-    List<UserDTOWithoutMd5Pass> findUsersByRole(String aRole);
+    UserDTO findUserById(Long aId);
+    List<UserDTO> findAllUsers();
+    List<UserDTO> findUsersByActivity(Boolean aActive);
+    UserDTO findUserByLogin(String aLogin);
+    UserDTO findUserByEmail(String aEmail);
+    List<UserDTO> findUsersByName(String aName);
+    List<UserDTO> findUsersBySurname(String aSurname);
+    List<UserDTO> findUsersByNameAndSurname(String aName, String aSurname);
+    List<UserDTO> findUsersByRole(String aRole);
 
     //UPDATE
-    void updateUserActivity(Long aId,Boolean aActive) throws MyServerException;
-    void updateUserLogin(Long aId, String aLogin) throws MyServerException;
-    void updateUserEmail(Long aId,String aName) throws MyServerException;
-    void updateUserRole(Long aId,String aName) throws MyServerException;
+    UserDTO updateUserActivity(UserDTOActive aUserDTO) throws MyServerException;
+    UserDTO updateUserLogin(UserDTOLogin aUserDTO) throws MyServerException;
+    UserDTO updateUserEmail(UserDTOEmail aUserDTO) throws MyServerException;
+    UserDTO updateUserRole(UserDTORole aUserDTO) throws MyServerException;
     UserDTO updatePermissionsListForUser(UserDTOPermissions aUserDTO) throws MyServerException;
-    void updateProjectListForUser(UserDTOProjects aUserDTO) throws MyServerException;
+    UserDTO updateProjectListForUser(UserDTOProjects aUserDTO) throws MyServerException;
 
     //DELETE
     void deletUser(Long aId) throws  MyServerException;

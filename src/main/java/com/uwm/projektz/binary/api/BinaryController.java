@@ -1,12 +1,11 @@
 package com.uwm.projektz.binary.api;
 
 import com.uwm.projektz.binary.dto.BinaryDTO;
-import com.uwm.projektz.binary.dto.BinaryDTOId;
+import com.uwm.projektz.binary.dto.BinaryDTOCreate;
 import com.uwm.projektz.binary.service.IBinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +15,6 @@ import java.util.List;
  */
 
 @RestController
-@Transactional
 @RequestMapping(value="/projektz/binaries")
 public class BinaryController {
 
@@ -34,18 +32,16 @@ public class BinaryController {
     public ResponseEntity<List<BinaryDTO>> findAllBinary(){
         return new ResponseEntity<>(binaryService.findAllBinary(),HttpStatus.OK);
     }
-//
-//
-//
+
     @RequestMapping(value ="/saveBinary", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<BinaryDTOId> saveBinary(@RequestBody BinaryDTO aBinaryDTO){
+    public ResponseEntity<BinaryDTO> saveBinary(@PathVariable("id") Long Id, @RequestBody BinaryDTOCreate aBinaryDTO){
         return new ResponseEntity<>(binaryService.saveBinary(aBinaryDTO),HttpStatus.OK);
     }
 
-    @RequestMapping(value= "/removeBinaryById/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value= "/removeBinaryById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<BinaryDTO> deleteBinary(@PathVariable("id")Long aId)
+    public ResponseEntity<Void> deleteBinary(@PathVariable("id")Long aId)
     {
         binaryService.deleteBinaryById(aId);
         return new ResponseEntity<>(HttpStatus.OK);

@@ -11,6 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPriorityRepository extends JpaRepository<PriorityOB,Long> {
-    @Query("SELECT p FROM PriorityOB p WHERE p.name = ?1")
+    @Query("SELECT p FROM PriorityOB p WHERE p.name LIKE ?1")
     PriorityOB findPriorityByName (String aName);
 }

@@ -12,10 +12,10 @@ import java.util.Date;
 
 @ApiModel
 public class ProjectDTO extends BaseDTO {
-    String name;
-    String descritpion;
-    String version;
-    PriorityDTO priority;
+   private String name;
+   private String descritpion;
+   private String version;
+   private PriorityDTO priority;
 
 
     public ProjectDTO() {
@@ -26,6 +26,13 @@ public class ProjectDTO extends BaseDTO {
         super(id,techdate);
         this.name = name;
         this.descritpion = desc;
+        this.version = version;
+        this.priority = priority;
+    }
+
+    public ProjectDTO(String name, String descritpion, String version, PriorityDTO priority) {
+        this.name = name;
+        this.descritpion = descritpion;
         this.version = version;
         this.priority = priority;
     }

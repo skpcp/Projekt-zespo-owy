@@ -9,16 +9,17 @@ import java.util.List;
 
 @ApiModel
 public class RoleDTO extends BaseDTO {
-    String name;
-    List<PermissionDTO> permissions;
+    private String name;
+    private List<PermissionDTO> permissions;
 
-    public RoleDTO() {
+    public RoleDTO(Long id, Date techDate, String name, List<PermissionDTO> permissions) {
+        super(id, techDate);
+        this.name = name;
+        this.permissions = permissions;
     }
 
-    public RoleDTO(Long id, Date techdate, String Name, List<PermissionDTO> permissions)
-    {
-        super(id,techdate);
-        this.name = Name;
+    public RoleDTO(String name, List<PermissionDTO> permissions) {
+        this.name = name;
         this.permissions = permissions;
     }
 

@@ -14,7 +14,6 @@ import java.util.List;
  * Created by Tomasz Komoszeski on 2016-04-20.
  */
 @RestController
-@Transactional
 @RequestMapping(value ="/projektz/permissions")
 public class PermissionController {
 
@@ -46,9 +45,9 @@ public class PermissionController {
         return new ResponseEntity<>(permissionService.savePermission(aPermission),HttpStatus.OK);
     }
 
-    @RequestMapping(value= "/removePermissionById/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value= "/removePermissionById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<PermissionDTO> deletePermission(@PathVariable("id")Long aId)
+    public ResponseEntity<Void> deletePermission(@PathVariable("id")Long aId)
     {
         permissionService.deletePermissionById(aId);
         return new ResponseEntity<>(HttpStatus.OK);

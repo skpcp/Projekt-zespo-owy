@@ -8,7 +8,6 @@ import com.uwm.projektz.history.dto.HistoryDTO;
 import com.uwm.projektz.priority.dto.PriorityDTO;
 import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.user.dto.UserDTO;
-import com.uwm.projektz.user.dto.UserDTOWithoutMd5Pass;
 import io.swagger.annotations.ApiModel;
 
 import java.util.Date;
@@ -20,19 +19,19 @@ import java.util.List;
 
 @ApiModel
 public class TicketDTO extends BaseDTO {
-    TicketType kind;
-    Type type;
-    String description;
-    UserDTOWithoutMd5Pass user;
-    PriorityDTO priority;
-    ProjectDTO project;
-    List<HistoryDTO> histories;
-    List<AttachmentDTO> attachments;
+    private TicketType kind;
+    private Type type;
+    private String description;
+    private UserDTO user;
+    private PriorityDTO priority;
+    private ProjectDTO project;
+    private List<HistoryDTO> histories;
+    private List<AttachmentDTO> attachments;
 
     public TicketDTO() {
     }
 
-    public TicketDTO(Long id, Date techDate, TicketType kind, Type type, String description, UserDTOWithoutMd5Pass user, PriorityDTO priority, ProjectDTO project, List<HistoryDTO> histories, List<AttachmentDTO> attachments) {
+    public TicketDTO(Long id, Date techDate, TicketType kind, Type type, String description, UserDTO user, PriorityDTO priority, ProjectDTO project, List<HistoryDTO> histories, List<AttachmentDTO> attachments) {
         super(id, techDate);
         this.kind = kind;
         this.type = type;
@@ -44,7 +43,7 @@ public class TicketDTO extends BaseDTO {
         this.attachments = attachments;
     }
 
-    public TicketDTO(TicketType kind, Type type, String description, UserDTOWithoutMd5Pass user, PriorityDTO priority, ProjectDTO project, List<HistoryDTO> histories, List<AttachmentDTO> attachments) {
+    public TicketDTO(TicketType kind, Type type, String description, UserDTO user, PriorityDTO priority, ProjectDTO project, List<HistoryDTO> histories, List<AttachmentDTO> attachments) {
         this.kind = kind;
         this.type = type;
         this.description = description;
@@ -79,11 +78,11 @@ public class TicketDTO extends BaseDTO {
         this.description = description;
     }
 
-    public UserDTOWithoutMd5Pass getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(UserDTOWithoutMd5Pass user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 

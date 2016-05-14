@@ -14,6 +14,6 @@ import java.util.List;
 
 @Repository
 public interface IPermissionRepository extends JpaRepository<PermissionOB,Long> {
-    @Query("SELECT p FROM PermissionOB p WHERE p.name = ?1")
+    @Query("SELECT p FROM PermissionOB p WHERE p.name LIKE ?1")
     PermissionOB findPermissionByName (String aName);
 }

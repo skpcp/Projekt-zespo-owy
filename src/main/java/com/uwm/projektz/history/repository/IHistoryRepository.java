@@ -1,7 +1,6 @@
 package com.uwm.projektz.history.repository;
 
 import com.uwm.projektz.history.ob.HistoryOB;
-import com.uwm.projektz.user.dto.UserDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,6 +1,9 @@
 package com.uwm.projektz.priority.service;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.priority.dto.PriorityDTO;
+import com.uwm.projektz.priority.dto.PriorityDTOCreate;
+import com.uwm.projektz.priority.dto.PriorityDTOUpdateName;
 
 import java.util.List;
 
@@ -10,7 +13,8 @@ import java.util.List;
 public interface IPriorityService  {
 
     //CREATE & UPDATE
-    PriorityDTO savePriority(PriorityDTO aProrityDTO);
+    PriorityDTO savePriority(PriorityDTOCreate aProrityDTO);
+    PriorityDTO changePriortyName(PriorityDTOUpdateName aPriorityDTO) throws MyServerException;
 
     //READ
     PriorityDTO findPriorityById(Long aId);

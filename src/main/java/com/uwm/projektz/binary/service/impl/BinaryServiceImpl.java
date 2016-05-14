@@ -2,7 +2,7 @@ package com.uwm.projektz.binary.service.impl;
 
 import com.uwm.projektz.binary.converter.BinaryConverter;
 import com.uwm.projektz.binary.dto.BinaryDTO;
-import com.uwm.projektz.binary.dto.BinaryDTOId;
+import com.uwm.projektz.binary.dto.BinaryDTOCreate;
 import com.uwm.projektz.binary.ob.BinaryOB;
 import com.uwm.projektz.binary.repository.IBinaryRepository;
 import com.uwm.projektz.binary.service.IBinaryService;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 /**
@@ -24,8 +25,10 @@ public class BinaryServiceImpl implements IBinaryService {
     IBinaryRepository binaryRepository;
 
     @Override
-    public BinaryDTOId saveBinary(BinaryDTO aBinaryDTO) {
-        return BinaryConverter.converterBinaryOBtoBinaryDTOId(binaryRepository.save(BinaryConverter.converterBinaryDTOtoOB(aBinaryDTO)));
+    public BinaryDTO saveBinary(BinaryDTOCreate aBinaryDTO) {
+        BinaryOB binaryOB = new BinaryOB();
+        binaryOB.setBinary(aBinaryDTO.getBinary() == null ? null : aBinaryDTO.getBinary().getBytes(StandardCharsets.UTF_8));
+        return BinaryConverter.converterBinaryOBtoDTO(binaryRepository.save(binaryOB));
     }
 
     @Override

@@ -16,45 +16,33 @@ import java.util.List;
 @Table(name = "users")
 @SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_USER_ID")
 public class UserOB extends BaseOB {
-    String name;
-    String surname;
+    private String name;
+    private String surname;
     @Column(unique = true)
-    String email;
+    private String email;
     @Column(unique = true)
-    String login;
-    String md5pass;
-    Boolean active;
+    private String login;
+    private String md5pass;
+    private Boolean active;
     @ManyToOne( fetch = FetchType.LAZY)
-    @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID")
-    RoleOB role;
+    @JoinColumn(name = "OWNER_ID", referencedColumnName = "ID")
+    private RoleOB role;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "USER_PROJECT",
             joinColumns = @JoinColumn(name ="USER_ID", referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PROJECT_ID",referencedColumnName = "ID")
     )
-    List<ProjectOB> projects = new ArrayList<>();
+    private List<ProjectOB> projects = new ArrayList<>();
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "USER_PERMISSION",
             joinColumns = @JoinColumn(name ="USER_ID",referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PERMISSION_ID",referencedColumnName = "ID")
     )
-    List<PermissionOB> permissions = new ArrayList<>();
+    private List<PermissionOB> permissions = new ArrayList<>();
 
     public UserOB() {
-    }
-
-    public UserOB(Long id, Date techDate, String name, String surname, String email, String login, Boolean active, RoleOB role, List<ProjectOB> projects, List<PermissionOB> permissions) {
-        super(id, techDate);
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.login = login;
-        this.active = active;
-        this.role = role;
-        this.projects = projects;
-        this.permissions = permissions;
     }
 
     public UserOB(String name, String surname, String email, String login, String md5pass) {
@@ -66,19 +54,6 @@ public class UserOB extends BaseOB {
     }
 
     public UserOB(String name, String surname, String email, String login, String md5pass, Boolean active, RoleOB role, List<ProjectOB> projects, List<PermissionOB> permissions) {
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.login = login;
-        this.md5pass = md5pass;
-        this.active = active;
-        this.role = role;
-        this.projects = projects;
-        this.permissions = permissions;
-    }
-
-    public UserOB(Long id, Date techdate, String name, String surname, String email, String login, String md5pass, Boolean active, RoleOB role, List<ProjectOB> projects, List<PermissionOB> permissions) {
-        super(id,techdate);
         this.name = name;
         this.surname = surname;
         this.email = email;
@@ -130,6 +105,14 @@ public class UserOB extends BaseOB {
         this.md5pass = md5pass;
     }
 
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
     public RoleOB getRole() {
         return role;
     }
@@ -152,14 +135,6 @@ public class UserOB extends BaseOB {
 
     public void setPermissions(List<PermissionOB> permissions) {
         this.permissions = permissions;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
     }
 }
 

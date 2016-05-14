@@ -1,10 +1,6 @@
 package com.uwm.projektz.attachment.dto;
 
-import com.uwm.projektz.binary.dto.BinaryDTO;
-import com.uwm.projektz.binary.dto.BinaryDTOId;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.dto.UserDTO;
-import com.uwm.projektz.user.dto.UserDTOId;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
@@ -15,25 +11,24 @@ import java.io.Serializable;
 
 @ApiModel
 public class AttachmentDTOCreate implements Serializable {
-    Long id;
-    Type type;
-    String name;
-    String file_name;
-    String mine_type;
-    Long binaryId;
-    Long userId;
+   private Long id;
+   private Type type;
+   private String name;
+   private String file_name;
+   private String mine_type;
+   private Long binary;
+
 
     public AttachmentDTOCreate() {
     }
 
-    public AttachmentDTOCreate(Long id, Type type, String name, String file_name, String mine_type, Long binaryId, Long userId) {
+    public AttachmentDTOCreate(Long id, Type type, String name, String file_name, String mine_type, Long binary) {
         this.id = id;
         this.type = type;
         this.name = name;
         this.file_name = file_name;
         this.mine_type = mine_type;
-        this.binaryId = binaryId;
-        this.userId = userId;
+        this.binary = binary;
     }
 
     public Long getId() {
@@ -76,19 +71,11 @@ public class AttachmentDTOCreate implements Serializable {
         this.mine_type = mine_type;
     }
 
-    public Long getBinaryId() {
-        return binaryId;
+    public Long getBinary() {
+        return binary;
     }
 
-    public void setBinaryId(Long binaryId) {
-        this.binaryId = binaryId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setBinary(Long binary) {
+        this.binary = binary;
     }
 }

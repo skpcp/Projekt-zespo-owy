@@ -15,25 +15,23 @@ import java.util.List;
 @Table(name = "roles")
 @SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_ROLE_ID")
 public class RoleOB extends BaseOB {
-    String name;
+    private String name;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name ="ROLES_PERMISSIONS",
             joinColumns = @JoinColumn(name="ROLE_ID",referencedColumnName = "ID"),
             inverseJoinColumns = @JoinColumn(name = "PROJ_ID",referencedColumnName = "ID")
             )
-    List<PermissionOB> permissions = new ArrayList<>();
+    private List<PermissionOB> permissions = new ArrayList<>();
 
 
     public RoleOB(){}
 
-    public RoleOB(String name, List<PermissionOB> permissions) {
+    public RoleOB(String name) {
         this.name = name;
-        this.permissions = permissions;
     }
 
-    public RoleOB(Long id, Date techdate, String name, List<PermissionOB> permissions) {
-        super(id,techdate);
+    public RoleOB(String name, List<PermissionOB> permissions) {
         this.name = name;
         this.permissions = permissions;
     }

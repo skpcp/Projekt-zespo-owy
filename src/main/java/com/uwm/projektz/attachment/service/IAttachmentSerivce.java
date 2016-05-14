@@ -4,7 +4,6 @@ import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.attachment.dto.AttachmentDTOCreate;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.dto.UserDTO;
 
 import java.util.List;
 
@@ -18,7 +17,6 @@ public interface IAttachmentSerivce {
     //READ
     AttachmentDTO findAttachmentById(Long aId);
     List<AttachmentDTO> findAllAttachment();
-    List<AttachmentDTO> findAllAttachmentsForUser(Long aId);
     List<AttachmentDTO> findAttachmentByName(String aName);
     List<AttachmentDTO> findAAtachmentsByFileName(String aFile_Name);
     List<AttachmentDTO> findAttachmentByMineType(String aMineType);

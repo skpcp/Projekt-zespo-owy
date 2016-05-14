@@ -1,7 +1,7 @@
 package com.uwm.projektz.binary.service;
 
 import com.uwm.projektz.binary.dto.BinaryDTO;
-import com.uwm.projektz.binary.dto.BinaryDTOId;
+import com.uwm.projektz.binary.dto.BinaryDTOCreate;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
 public interface IBinaryService {
 
     //CREATE & UPDATE
-    BinaryDTOId saveBinary(BinaryDTO aBinaryDTO);
+    BinaryDTO saveBinary(BinaryDTOCreate aBinaryDTO);
 
     //READ
     BinaryDTO findBinaryById(Long aId);

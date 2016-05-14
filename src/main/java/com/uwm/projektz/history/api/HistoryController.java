@@ -2,6 +2,7 @@ package com.uwm.projektz.history.api;
 
 import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.history.dto.HistoryDTO;
+import com.uwm.projektz.history.dto.HistoryDTOAttachments;
 import com.uwm.projektz.history.dto.HistoryDTOWithoutAttachment;
 import com.uwm.projektz.history.service.IHistoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import java.util.List;
  */
 
 @RestController
-@Transactional
 @RequestMapping("/projektz/histories")
 public class HistoryController {
     @Autowired
@@ -68,9 +68,20 @@ public class HistoryController {
         }
     }
 
-    @RequestMapping(value= "/removeHistoryById/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value ="/saveHistoryWithAttachments", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<HistoryDTO> deleteHistory(@PathVariable("id")Long aId)
+    public ResponseEntity<HistoryDTO> saveHistoryWithAttachments(@RequestBody HistoryDTOAttachments aHistory){
+        try{
+            return new ResponseEntity<>(historyService.saveHistoryWithAttachments(aHistory),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+    }
+
+
+    @RequestMapping(value= "/removeHistoryById/{id}",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Void> deleteHistory(@PathVariable("id")Long aId)
     {
         historyService.deleteHistoryById(aId);
         return new ResponseEntity<>(HttpStatus.OK);

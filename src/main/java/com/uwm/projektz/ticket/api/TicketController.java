@@ -7,6 +7,8 @@ import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.history.dto.HistoryDTO;
 import com.uwm.projektz.priority.dto.PriorityDTO;
 import com.uwm.projektz.ticket.dto.TicketDTO;
+import com.uwm.projektz.ticket.dto.TicketDTOAttachments;
+import com.uwm.projektz.ticket.dto.TicketDTOHistory;
 import com.uwm.projektz.ticket.dto.TicketDTOWithoutHistoriesAttachments;
 import com.uwm.projektz.ticket.service.ITicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,7 @@ import java.util.List;
  * Created by Tomasz Komoszeski on 2016-04-20.
  */
 @RestController
-@Transactional
-@RequestMapping(value = "/projektz/tickets")
+@RequestMapping("/projektz/tickets")
 public class TicketController {
 
     @Autowired
@@ -74,8 +75,6 @@ public class TicketController {
     }
 
 
-
-
     @RequestMapping(value="/saveTicket",method = RequestMethod.POST, consumes ="application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<TicketDTO> saveTicket(@RequestBody TicketDTOWithoutHistoriesAttachments aTicketDTO){
@@ -86,40 +85,30 @@ public class TicketController {
         }
     }
 
-    //update
-
-    @RequestMapping(value = "/changeDescriptionToTicket/{id},{description}",method = RequestMethod.POST,consumes = "aplication/json",produces = "appliaction/json")
+    @RequestMapping(value="/saveTicketWithAttachments",method = RequestMethod.POST, consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<TicketDTO> updateDescriptionForTicket(@PathVariable("id")Long aId,@PathVariable("description") String aDescription){
-        return  new ResponseEntity<>(ticketService.updateDescriptionForTicket(aId,aDescription),HttpStatus.OK);
+    public ResponseEntity<TicketDTO> saveTicketWithAttachments(@RequestBody TicketDTOAttachments aTicketDTO){
+        try {
+            return new ResponseEntity<>(ticketService.saveTcketWithAttachments(aTicketDTO), HttpStatus.OK);
+        }catch (MyServerException e){
+            return  new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
     }
 
-    @RequestMapping(value="/addAttachmentToTicket/{id}", method = RequestMethod.POST,consumes = "aplication/json",produces = "appliaction/json")
+    @RequestMapping(value="/removeTicketById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<TicketDTO> updateAttachmentForTciket(@PathVariable("id") Long aId, @RequestBody AttachmentDTO aAttachmentDTO,File aFile){
-        return new ResponseEntity<>(ticketService.updateAttachemntForTicket(aId, aAttachmentDTO),HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/addHistoryToTicket/{id}", method = RequestMethod.POST,consumes = "aplication/json",produces = "appliaction/json")
-    @ResponseBody
-    public ResponseEntity<TicketDTO> updateHistoryForTicket(@PathVariable("id") Long aId, @RequestBody HistoryDTO aHistoryDTO){
-        return new ResponseEntity<>(ticketService.updateHistoryTicket(aId, aHistoryDTO),HttpStatus.OK);
-    }
-
-    @RequestMapping(value="/changeTicketTypeAndTypeFor/{id},{kind},{type}", method = RequestMethod.POST,consumes = "aplication/json",produces = "appliaction/json")
-    @ResponseBody
-    public ResponseEntity<TicketDTO> updateTicketTypeAndTypeForTicket(@PathVariable("id") Long aId, @PathVariable("kind") TicketType aKind,@PathVariable("type") Type aType){
-       return new ResponseEntity<>(ticketService.updateTicketTypeAndKind(aId,aKind,aType),HttpStatus.OK);
-
-    }
-
-
-
-    @RequestMapping(value="/removeTicketById/{id}",method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<TicketDTO> deleteTicket(@PathVariable("id") Long aId){
+    public ResponseEntity<Void> deleteTicket(@PathVariable("id") Long aId){
         ticketService.deletTicketById(aId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/addHistoryToTicket",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<TicketDTO> updateTicketHistory(@RequestBody TicketDTOHistory aTicketDTO){
+        try {
+            return new ResponseEntity<>(ticketService.updateHistoryTicket(aTicketDTO), HttpStatus.OK);
+        }catch (MyServerException e){
+            return  new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+    }
 }

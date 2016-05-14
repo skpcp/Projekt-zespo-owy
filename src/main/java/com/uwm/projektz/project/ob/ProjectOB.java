@@ -17,24 +17,16 @@ import java.util.Date;
 @SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_PROJECT_ID")
 public class ProjectOB extends BaseOB {
     @Column(unique = true)
-    String name;
-    String descritpion;
-    String version;
+    private String name;
+    private String descritpion;
+    private String version;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name ="PRIORITY_ID", referencedColumnName = "ID")
-    PriorityOB priority;
+    private PriorityOB priority;
 
     public ProjectOB(){}
 
     public ProjectOB(String name, String descritpion, String version, PriorityOB priority) {
-        this.name = name;
-        this.descritpion = descritpion;
-        this.version = version;
-        this.priority = priority;
-    }
-
-    public ProjectOB(Long id, Date techdate, String name, String descritpion, String version, PriorityOB priority) {
-        super(id,techdate);
         this.name = name;
         this.descritpion = descritpion;
         this.version = version;

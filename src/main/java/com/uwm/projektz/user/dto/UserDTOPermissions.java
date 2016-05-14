@@ -1,5 +1,6 @@
 package com.uwm.projektz.user.dto;
 
+import com.google.common.annotations.VisibleForTesting;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import io.swagger.annotations.ApiModel;
 
@@ -13,10 +14,13 @@ import java.util.List;
 
 @ApiModel
 public class UserDTOPermissions implements Serializable {
-    Long id;
-    List<PermissionDTO> permissions =  new ArrayList<>();
+    private Long id;
+    private List<String> permissions;
 
-    public UserDTOPermissions(Long id, List<PermissionDTO> permissions) {
+    public UserDTOPermissions() {
+    }
+
+    public UserDTOPermissions(Long id, List<String> permissions) {
         this.id = id;
         this.permissions = permissions;
     }
@@ -29,11 +33,11 @@ public class UserDTOPermissions implements Serializable {
         this.id = id;
     }
 
-    public List<PermissionDTO> getPermissions() {
+    public List<String> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<PermissionDTO> permissions) {
+    public void setPermissions(List<String> permissions) {
         this.permissions = permissions;
     }
 }

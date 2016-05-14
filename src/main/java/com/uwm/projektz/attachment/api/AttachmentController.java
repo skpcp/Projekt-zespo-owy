@@ -19,7 +19,6 @@ import java.util.List;
  */
 
 @RestController
-@Transactional
 @RequestMapping(value="/projektz/attachments")
 public class AttachmentController {
 
@@ -73,21 +72,15 @@ public class AttachmentController {
         return new ResponseEntity<>(attachmentSerivce.findAAtachemntByMineTypeAndName(aMineType,aName), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/getByUser/{user.id}", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<List<AttachmentDTO>> findAllAttachmentsForUser(@PathVariable("user.id") Long aId){
-        return new ResponseEntity<>(attachmentSerivce.findAllAttachmentsForUser(aId), HttpStatus.OK);
-    }
-
     @RequestMapping(value = "/getByType/{type}", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<List<AttachmentDTO>> findAttachmentByType(@PathVariable("type") Type aType){
         return new ResponseEntity<>(attachmentSerivce.findAttachmentByType(aType), HttpStatus.OK);
     }
 
-    @RequestMapping(value= "/removAttachmentById/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value= "/removAttachmentById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<AttachmentDTO> deleteAttachment(@PathVariable("id")Long aId)
+    public ResponseEntity<Void> deleteAttachment(@PathVariable("id")Long aId)
     {
         attachmentSerivce.deleteAttachmentById(aId);
         return new ResponseEntity<>(HttpStatus.OK);

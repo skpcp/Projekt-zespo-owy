@@ -8,7 +8,7 @@ import java.util.Date;
  */
 @MappedSuperclass
 @SequenceGenerator(allocationSize = 1, name = "SEQ", sequenceName = "GEN_BASE_ID")
-public class BaseOB implements Serializable{
+public abstract class BaseOB implements Serializable{
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "SEQ")
@@ -18,11 +18,6 @@ public class BaseOB implements Serializable{
     private Date techDate;
 
     public BaseOB(){}
-
-    public BaseOB(Long id, Date techDate) {
-        this.id = id;
-        this.techDate = techDate;
-    }
 
     public Long getId() {
         return id;

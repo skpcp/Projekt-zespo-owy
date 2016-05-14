@@ -14,17 +14,14 @@ import java.util.Date;
 public class BinaryOB extends BaseOB {
     @Lob
     @Column(name="CONTENT")
-    byte[] binary;
+    private byte[] binary;
 
-    public BinaryOB(){
-
+    public BinaryOB() {
     }
 
-    public BinaryOB(Long id, Date techdate, byte[] binary) {
-        super(id,techdate);
+    public BinaryOB(byte[] binary) {
         this.binary = binary;
     }
-
 
     public byte[] getBinary() {
         return binary;

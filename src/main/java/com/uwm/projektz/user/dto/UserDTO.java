@@ -7,31 +7,43 @@ import com.uwm.projektz.role.dto.RoleDTO;
 import io.swagger.annotations.ApiModel;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Date;
+import java.util.List;
 
+/**
+ * Created by Tomasz Komoszeski on 2016-05-12.
+ */
 @ApiModel
 public class UserDTO extends BaseDTO {
-    String name;
-    String surname;
-    String email;
-    String login;
-    String md5pass;
-    Boolean active;
-    RoleDTO role;
-    List<ProjectDTO> projects = new ArrayList<>();
-    List<PermissionDTO> permissions =  new ArrayList<>();
+    private String name;
+    private String surname;
+    private String email;
+    private String login;
+    private Boolean active;
+    private RoleDTO role;
+    private List<ProjectDTO> projects = new ArrayList<>();
+    private List<PermissionDTO> permissions =  new ArrayList<>();
 
     public UserDTO() {
     }
 
-    public UserDTO(Long id, Date techdate, String name, String surname, String email, String login, String md5pass, Boolean active, RoleDTO role, List<ProjectDTO> projects, List<PermissionDTO> permissions) {
-        super(id,techdate);
+    public UserDTO(Long id, Date techDate, String name, String surname, String email, String login, Boolean active, RoleDTO role, List<ProjectDTO> projects, List<PermissionDTO> permissions) {
+        super(id, techDate);
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.login = login;
-        this.md5pass = md5pass;
+        this.active = active;
+        this.role = role;
+        this.projects = projects;
+        this.permissions = permissions;
+    }
+
+    public UserDTO(String name, String surname, String email, String login, Boolean active, RoleDTO role, List<ProjectDTO> projects, List<PermissionDTO> permissions) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.login = login;
         this.active = active;
         this.role = role;
         this.projects = projects;
@@ -70,14 +82,6 @@ public class UserDTO extends BaseDTO {
         this.login = login;
     }
 
-    public String getMd5pass() {
-        return md5pass;
-    }
-
-    public void setMd5pass(String md5pass) {
-        this.md5pass = md5pass;
-    }
-
     public Boolean getActive() {
         return active;
     }
@@ -109,6 +113,6 @@ public class UserDTO extends BaseDTO {
     public void setPermissions(List<PermissionDTO> permissions) {
         this.permissions = permissions;
     }
+
+
 }
-
-

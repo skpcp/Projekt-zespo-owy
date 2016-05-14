@@ -12,19 +12,12 @@ import java.util.Date;
 @SequenceGenerator(initialValue = 1,name = "SEQ",sequenceName = "GEN_PRIORITY_ID")
 public class PriorityOB extends BaseOB {
     @Column(unique = true)
-    String name;
-    String responseTime;
+    private String name;
+    private String responseTime;
 
     public PriorityOB(){}
 
     public PriorityOB(String name, String responseTime) {
-        this.name = name;
-        this.responseTime = responseTime;
-    }
-
-    public PriorityOB(Long id, Date techdate, String name, String responseTime)
-    {
-        super(id,techdate);
         this.name = name;
         this.responseTime = responseTime;
     }
@@ -45,3 +38,4 @@ public class PriorityOB extends BaseOB {
         this.responseTime = responseTime;
     }
 }
+

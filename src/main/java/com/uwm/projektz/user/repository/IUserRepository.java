@@ -18,7 +18,7 @@ import java.util.List;
 public interface IUserRepository extends JpaRepository<UserOB,Long> {
     @Query("SELECT u FROM UserOB u WHERE u.active = ?1")
     List<UserOB> findUserByActivity (Boolean aActive);
-    @Query("SELECT u FROM UserOB u WHERE u.login = ?1")
+    @Query("SELECT u FROM UserOB u WHERE u.login LIKE ?1")
     UserOB findUserByLogin (String aLogin);
     @Query("SELECT u FROM UserOB u WHERE u.email LIKE ?1")
     UserOB findUserByEmail (String aEmail);

@@ -5,27 +5,31 @@ import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
- * Created by Tomasz Komoszeski on 2016-05-12.
+ * Created by Tomasz Komoszeski on 2016-05-14.
  */
-@ApiModel
-public class HistoryDTOWithoutAttachment implements Serializable {
-   private Long id;
-   private Type type;
-   private String user;
-   private String description;
-   private Date date;
 
-    public HistoryDTOWithoutAttachment() {
+@ApiModel
+public class HistoryDTOAttachments implements Serializable{
+    private Long id;
+    private Type type;
+    private String user;
+    private String description;
+    private Date date;
+    private List<Long> attachments;
+
+    public HistoryDTOAttachments() {
     }
 
-    public HistoryDTOWithoutAttachment(Long id, Type type, String user, String description, Date date) {
+    public HistoryDTOAttachments(Long id, Type type, String user, String description, Date date, List<Long> attachments) {
         this.id = id;
         this.type = type;
         this.user = user;
         this.description = description;
         this.date = date;
+        this.attachments = attachments;
     }
 
     public Long getId() {
@@ -66,5 +70,13 @@ public class HistoryDTOWithoutAttachment implements Serializable {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<Long> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<Long> attachments) {
+        this.attachments = attachments;
     }
 }

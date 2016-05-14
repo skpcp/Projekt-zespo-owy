@@ -1,9 +1,12 @@
 package com.uwm.projektz.base.dto;
 
+import io.swagger.annotations.ApiModel;
+
 import java.io.Serializable;
 import java.util.Date;
 
-public class BaseDTO implements Serializable {
+@ApiModel
+public abstract class BaseDTO implements Serializable {
     private Long id;
     private Date techDate;
 

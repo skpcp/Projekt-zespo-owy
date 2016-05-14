@@ -1,7 +1,9 @@
 package com.uwm.projektz.role.service;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.role.dto.RoleDTO;
+import com.uwm.projektz.role.dto.RoleDTOCreate;
 
 import java.util.List;
 
@@ -10,7 +12,7 @@ import java.util.List;
  */
 public interface IRoleService {
     //CREATE & UPDATE
-    RoleDTO saveRole(RoleDTO aRoleDTO);
+    RoleDTO saveRole(RoleDTOCreate aRoleDTO) throws MyServerException;
     //READ
     RoleDTO findPRoleById(Long aId);
     List<RoleDTO> findAllRole();

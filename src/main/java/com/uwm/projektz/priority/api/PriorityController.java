@@ -1,6 +1,9 @@
 package com.uwm.projektz.priority.api;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.priority.dto.PriorityDTO;
+import com.uwm.projektz.priority.dto.PriorityDTOCreate;
+import com.uwm.projektz.priority.dto.PriorityDTOUpdateName;
 import com.uwm.projektz.priority.service.IPriorityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +19,6 @@ import java.util.List;
 
 
 @RestController
-@Transactional
 @RequestMapping(value = "/projektz/priorities")
 public class PriorityController {
 
@@ -43,15 +45,25 @@ public class PriorityController {
 
     @RequestMapping(value ="/savePriority", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<PriorityDTO> savePriority(@RequestBody PriorityDTO aPriority){
+    public ResponseEntity<PriorityDTO> savePriority(@RequestBody PriorityDTOCreate aPriority){
         return new ResponseEntity<>(priorityService.savePriority(aPriority),HttpStatus.OK);
     }
 //
-    @RequestMapping(value= "/removePriority/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value= "/removePriority/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<PriorityDTO> deletePriority(@PathVariable("id")Long aId)
+    public ResponseEntity<Void> deletePriority(@PathVariable("id")Long aId)
     {
         priorityService.deletePriority(aId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/changePriorityName",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<PriorityDTO> updatePriorityName(@RequestBody PriorityDTOUpdateName aProrityDTO){
+        try{
+            return new ResponseEntity<>(priorityService.changePriortyName(aProrityDTO),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
     }
 }

@@ -9,11 +9,11 @@ import java.io.Serializable;
  */
 @ApiModel
 public class UserDTOCreate implements Serializable {
-    String name;
-    String surname;
-    String email;
-    String login;
-    String md5pass;
+    private String name;
+    private String surname;
+    private String email;
+    private String login;
+    private String md5pass;
 
     public UserDTOCreate() {
     }

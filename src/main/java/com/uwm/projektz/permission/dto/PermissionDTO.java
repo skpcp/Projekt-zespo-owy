@@ -7,14 +7,17 @@ import java.util.Date;
 
 @ApiModel
 public class PermissionDTO extends BaseDTO {
-    String name;
+    private String name;
 
     public PermissionDTO() {
     }
 
-    public PermissionDTO(Long id, Date techdate, String name)
-    {
-        super(id,techdate);
+    public PermissionDTO(String name) {
+        this.name = name;
+    }
+
+    public PermissionDTO(Long id, Date techDate, String name) {
+        super(id, techDate);
         this.name = name;
     }
 

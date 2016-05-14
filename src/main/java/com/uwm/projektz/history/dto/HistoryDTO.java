@@ -4,7 +4,6 @@ import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.base.dto.BaseDTO;
 import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.user.dto.UserDTO;
-import com.uwm.projektz.user.dto.UserDTOWithoutMd5Pass;
 import io.swagger.annotations.ApiModel;
 
 import java.util.Date;
@@ -16,16 +15,16 @@ import java.util.List;
 
 @ApiModel
 public class HistoryDTO extends BaseDTO {
-    Type type;
-    UserDTOWithoutMd5Pass user;
-    String description;
-    Date date;
-    List<AttachmentDTO> attachments;
+    private Type type;
+    private UserDTO user;
+    private String description;
+    private Date date;
+    private List<AttachmentDTO> attachments;
 
     public HistoryDTO() {
     }
 
-    public HistoryDTO(Long id, Date techDate, Type type, UserDTOWithoutMd5Pass user, String description, Date date, List<AttachmentDTO> attachments) {
+    public HistoryDTO(Long id, Date techDate, Type type, UserDTO user, String description, Date date, List<AttachmentDTO> attachments) {
         super(id, techDate);
         this.type = type;
         this.user = user;
@@ -34,7 +33,7 @@ public class HistoryDTO extends BaseDTO {
         this.attachments = attachments;
     }
 
-    public HistoryDTO(Type type, UserDTOWithoutMd5Pass user, String description, Date date, List<AttachmentDTO> attachments) {
+    public HistoryDTO(Type type, UserDTO user, String description, Date date, List<AttachmentDTO> attachments) {
         this.type = type;
         this.user = user;
         this.description = description;
@@ -50,11 +49,11 @@ public class HistoryDTO extends BaseDTO {
         this.type = type;
     }
 
-    public UserDTOWithoutMd5Pass getUser() {
+    public UserDTO getUser() {
         return user;
     }
 
-    public void setUser(UserDTOWithoutMd5Pass user) {
+    public void setUser(UserDTO user) {
         this.user = user;
     }
 

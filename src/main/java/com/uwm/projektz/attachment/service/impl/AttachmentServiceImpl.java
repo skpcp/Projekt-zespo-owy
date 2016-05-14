@@ -10,7 +10,6 @@ import com.uwm.projektz.attachment.service.IAttachmentSerivce;
 import com.uwm.projektz.binary.ob.BinaryOB;
 import com.uwm.projektz.binary.repository.IBinaryRepository;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.dto.UserDTO;
 import com.uwm.projektz.user.ob.UserOB;
 import com.uwm.projektz.user.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,8 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.Convert;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -48,11 +46,7 @@ public class AttachmentServiceImpl implements IAttachmentSerivce {
         return AttachmentConverter.converterAttachmentListOBtoDTO(attachmentRepository.findAll());
     }
 
-    @Override
-    public List<AttachmentDTO> findAllAttachmentsForUser(Long aId) {
-        List<AttachmentOB> attachemnts = attachmentRepository.findAllAttachmentsOfUser(aId);
-        return AttachmentConverter.converterAttachmentListOBtoDTO(attachemnts);
-    }
+
 
     @Override
     public List<AttachmentDTO> findAttachmentByName(String aName) {
@@ -91,12 +85,20 @@ public class AttachmentServiceImpl implements IAttachmentSerivce {
 
     @Override
     public AttachmentDTO saveAttachment(AttachmentDTOCreate aAttachmentDTO) throws MyServerException {
-        UserOB userOB = aAttachmentDTO.getUserId() == null ? null : userRepository.findOne(aAttachmentDTO.getUserId());
-        if(userOB == null) throw  new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        BinaryOB binaryOB = aAttachmentDTO.getBinaryId() == null ? null : binaryRepository.findOne(aAttachmentDTO.getBinaryId());
+        BinaryOB binaryOB = aAttachmentDTO.getBinary() == null ? null : binaryRepository.findOne(aAttachmentDTO.getBinary());
         if(binaryOB == null) throw  new MyServerException("Binary not found",HttpStatus.NOT_FOUND);
         AttachmentOB attachmentOB = aAttachmentDTO.getId() == null ? null : attachmentRepository.findOne(aAttachmentDTO.getId());
-        if(attachmentOB == null) attachmentOB = new AttachmentOB(aAttachmentDTO.getType(),aAttachmentDTO.getName(),aAttachmentDTO.getFile_name(),aAttachmentDTO.getMine_type(),binaryOB,userOB);
+        if(attachmentOB == null) {
+            attachmentOB = AttachmentConverter.converterAttachmentDTOCreateToAttachmentOB(aAttachmentDTO);
+            attachmentOB.setBinary(binaryOB);
+            return AttachmentConverter.converterAttachmentOBtoDTO(attachmentRepository.save(attachmentOB));
+        }
+        attachmentOB.setTechDate(new Date());
+        attachmentOB.setBinary(binaryOB);
+        attachmentOB.setName(aAttachmentDTO.getName());
+        attachmentOB.setType(aAttachmentDTO.getType());
+        attachmentOB.setMine_type(aAttachmentDTO.getMine_type());
+        attachmentOB.setFile_name(aAttachmentDTO.getFile_name());
         return AttachmentConverter.converterAttachmentOBtoDTO(attachmentRepository.save(attachmentOB));
     }
 }

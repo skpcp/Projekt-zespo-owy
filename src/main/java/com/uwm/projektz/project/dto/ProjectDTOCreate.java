@@ -1,6 +1,5 @@
 package com.uwm.projektz.project.dto;
 
-import com.uwm.projektz.priority.dto.PriorityDTOName;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
@@ -10,10 +9,10 @@ import java.io.Serializable;
  */
 @ApiModel
 public class ProjectDTOCreate implements Serializable{
-    String name;
-    String descritpion;
-    String version;
-    String priority;
+   private String name;
+   private String descritpion;
+   private String version;
+   private String priority;
 
     public ProjectDTOCreate() {
     }

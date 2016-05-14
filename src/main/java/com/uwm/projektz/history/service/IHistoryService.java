@@ -2,8 +2,8 @@ package com.uwm.projektz.history.service;
 
 import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.history.dto.HistoryDTO;
+import com.uwm.projektz.history.dto.HistoryDTOAttachments;
 import com.uwm.projektz.history.dto.HistoryDTOWithoutAttachment;
-import com.uwm.projektz.user.dto.UserDTO;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +15,7 @@ public interface IHistoryService  {
 
     //CREATE & UPDATE
     HistoryDTO saveHistory(HistoryDTOWithoutAttachment aPermissionDTO) throws MyServerException;
+    HistoryDTO saveHistoryWithAttachments(HistoryDTOAttachments aPermissionDTO) throws MyServerException;
 
     //UPDATE
     //dodawanie attachmentu

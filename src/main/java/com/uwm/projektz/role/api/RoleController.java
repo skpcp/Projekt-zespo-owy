@@ -1,7 +1,9 @@
 package com.uwm.projektz.role.api;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.role.dto.RoleDTO;
+import com.uwm.projektz.role.dto.RoleDTOCreate;
 import com.uwm.projektz.role.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,11 +42,15 @@ public class RoleController {
         return new ResponseEntity<>(roleService.findByName(aName),HttpStatus.OK);
     }
 
-//    @RequestMapping(value ="/saveRole", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
-//    @ResponseBody
-//    public ResponseEntity<RoleDTO> saveRole(@RequestBody RoleDTO aRole){
-//        return new ResponseEntity<>(roleService.saveRole(aRole),HttpStatus.OK);
-//    }
+    @RequestMapping(value ="/saveRole", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
+    @ResponseBody
+    public ResponseEntity<RoleDTO> saveRole(@RequestBody RoleDTOCreate aRole){
+        try {
+            return new ResponseEntity<>(roleService.saveRole(aRole), HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+    }
 
     @RequestMapping(value= "/removeRoleById/{id}",method = RequestMethod.DELETE)
     @ResponseBody

@@ -35,7 +35,7 @@ public class BinaryController {
 
     @RequestMapping(value ="/saveBinary", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<BinaryDTO> saveBinary(@PathVariable("id") Long Id, @RequestBody BinaryDTOCreate aBinaryDTO){
+    public ResponseEntity<BinaryDTO> saveBinary(@RequestBody BinaryDTOCreate aBinaryDTO){
         return new ResponseEntity<>(binaryService.saveBinary(aBinaryDTO),HttpStatus.OK);
     }
 

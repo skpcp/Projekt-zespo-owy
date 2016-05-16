@@ -45,6 +45,18 @@ Metoda | Funkcjonalność | Opis
 
 b)Ticket controller
 
-Metoda | Funlcjonalność | Opis 
+Metoda | Funkcjonalność | Opis 
  --- | --- | --- 
 
+</br>
+c)Role controller 
+
+Metoda | Funkcjonalość | Opis
+ --- | --- | ---
+*/getByName* | Find role by name | Umożliwia wyszukanie roli po przez pole nazwa (name). Pole to jest pole kluczowym w tym przypadku wyszukiwania i nie może pozostać puste. W przypadku braku jego wypełnienia system upomni się o to. Jeżeli popełnimy jakiś błąd otrzymamy odpowiedni komunikat zwrotny. Wraz z wyszukaniem roli podane zostaną jej informacje.
+*/getById* | Find role by id | Umożliwia wyszukanie roli po przez numer id. Pole to jest konieczne i nie może zostać puste. W przypadku popełnienia jakiegoś błędu system pokaże nam komunikat o nim. Po znalezieniu wpisanego id zostanie pokazana przypisana do niego rola.
+*/getAll* | Find all role | Umożliwia wyświetlenie wszystkich roli w systemie. Nie posiada żadnych pól kluczowych. 
+*/removeRoleById* | Delete role | Umożliwia usunięcie roli po przez podanie numeru id roli, którą chcemy usunąć. Pole id jest kluczem głónym wyszukiwania co świadczy o tym że nie może być puste. Jeżeli nic w nie wpiszemy pole zostanie pogrubione czerwonym prostokątem. W przypadku popełnienia innego błędu system wyświetli odpowiedni komunikat o błędzie. 
+</br>
+
+d)

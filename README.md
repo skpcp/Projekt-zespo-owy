@@ -41,3 +41,10 @@ Metoda | Funkcjonalność | Opis
 */changeUserRole* | Change user role | Pozwala na zmianę roli użytkownika w systemie. Aby to wykonać należy wpisać numer id użytkownika, któremu chcemy zmienic rolę a następnie nazwę nowej roli. Spowoduje to aktualizacjię roli naszego użytkownika.
 */changeLogin* | Update user login | Pozwala na zmianę loginu użytkownika. Aby to zrobić w pole login wpisujemy nowy login i numer id użytkownika dla którego adres jest zmieniany. Jeżeli popełnimy jakiś błąd system pokaże nam odpowiedni komunikat. Jeżeli wszystko będzie wporządku system wykona żądaną operacje. 
 */changeEmail* | Update user email | Pozwala na zmianę adresu mailowego użytkownika. Aby to zrobić musimy podać numer id użytkownika a następnie jego nowy mail (pole email). Jeżeli popełnimy błąd system nam pokaże odpowiedni komunikat. Jeżeli wszystko będzie zrobione poprawnie mail zostanie zmieniony.
+</br>
+
+b)Ticket controller
+
+Metoda | Funlcjonalność | Opis 
+ --- | --- | --- 
+

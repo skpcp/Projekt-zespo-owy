@@ -119,5 +119,15 @@ Metoda | Funkcjonalość | Opis
 */getAll* | Find all history | Umożliwia wyświetlenie wszystkich pozwoleń w systemie. Nie posiada żadnych pól kluczowych. 
 </br>
 
+h)Binary controller
+
+Metoda | Funkcjonalność | Opis 
+ --- | --- | --- 
+*/saveBinary* | Save binary | Pozwala na zapisanie danych pliku w postaci binarnej. 
+*/removeBinaryById* | Delete binary | Pozwala na trwałe usunięcie binari. Można tego dokonać za pomocą numeru id. Pole to jest potrzebne do wykonania operacji i nie może być puste. 
+*/getBinaryById* | Find binary by id | Pozwala na znalezienie odpowiedniego binaria za pomocą jego numeru id. Pole id jest kluczem wyszukiwania i musi być wpisane. Brak pokaże nam system. Inne błędy będą obsługiwane przez odpowiednie komunikaty. 
+*/getAllBinaries* | Find all binary | Umożliwia wyświetlenie wszystkich pozwoleń w systemie. Nie posiada żadnych pól kluczowych.
+</br> 
+
 
 

@@ -47,7 +47,7 @@ b)Ticket controller
 
 Metoda | Funkcjonalność | Opis 
  --- | --- | --- 
-
+*/saveTicket* | Save ticket | Pozwala na zapisanie błędu po przez podanie: description (opis), kind (prbolem), priority (priorytet), project (projekt), type (typ), user (użytkownik). Zgłoszenia może dokonać admin lub advanced_user. Przy zapisie zgłoszenia musi zostać podany projekt do którego jest dokonywane zgłoszenie a także priorytet. Numer id jest nadawany automatycznie i nie trzeba go podawać. Typ może być wewnetrzny lub zewnetrzny zależy czy chcemy aby zwykły użytkownik to widział. W przypadku popełnienia błędu zostanie pokazany odpowiedni komunikat.
 </br>
 c)Role controller 
 
@@ -95,4 +95,8 @@ Metoda | Funkcjonalność | Opis
 */getAll* | Find all permission | Umożliwia wyświetlenie wszystkich pozwoleń w systemie. Nie posiada żadnych pól kluczowych.
 </br>
 
+g)History controller 
+
+Metoda | Funkcjonalość | Opis
+ --- | --- | ---
 

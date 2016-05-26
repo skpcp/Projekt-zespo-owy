@@ -69,6 +69,7 @@ Metoda | Funkcjonalonść | Opis
 */getByName* | Find project by name | Pozwoli nam znaleść projekt o odpowowiadającej nazwie do nazwy wyszukiwania. Pole name (nazwa) nie może zostać puste ponieważ jest kluczem. O braku wypełnienia poinformuje nas system przez zaznaczenie tego pola. Inne błędy będą informowane przez odpowiednie komunikaty. Po znalezieniu szukanego projektu zostaną wyświetlone informacje o nim.
 */getById* | Find project by id | Wyszukanie za pomocą numeru id projektu. Jedynym polem wyszukiwania jest id, które nie może zostać puste. Brak wypełnienia zostanie zaznaczony. Popełnienie innego błędu będzie skutkowało pokazaniem odpowiedniego komunikatu. Jeżeli wyszukiwanie zakończy się sukcesem zostanie pokazany odpowiedni projekt z jego informacjami.
 */getAll* | Find all project | Umożliwia wyświetlenie wszystkich projektów w systemie. Nie posiada żadnych pól kluczowych. 
+*/changeNameForProject* | Update project name | Pozwala na zmianę nazwy projektu po przez podanie numeru id a także nazwy pole (name). Nazwa zostanie zmieniona dla projektu, któremu odpowiada podany numer id. W przypadku błędu system nam to pokaże nam odpowiedni komunikat.
 </br>
 
 

@@ -59,4 +59,16 @@ Metoda | Funkcjonalość | Opis
 */removeRoleById* | Delete role | Umożliwia usunięcie roli po przez podanie numeru id roli, którą chcemy usunąć. Pole id jest kluczem głónym wyszukiwania co świadczy o tym że nie może być puste. Jeżeli nic w nie wpiszemy pole zostanie pogrubione czerwonym prostokątem. W przypadku popełnienia innego błędu system wyświetli odpowiedni komunikat o błędzie. 
 </br>
 
-d)
+d)Project controller 
+
+Metoda | Funkcjonalonść | Opis 
+ --- | --- | --- 
+*/saveProject* | Save project | Pozwala na utworzenie nowego projektu. W czasie jego tworzenia podajemy: description (opis), name (nazwę), priority (priorytet), version (wersje). Podczas tworzenia nowego projektu najważniejsze jest dodanie do niego opisu, ponieważ sugeruje nam o co w nim chodzi. Podczas tworzenia musi zostać podany odpowiedni proirytet. Bez niego nie zostanie utworzony projekt. Informacje o rozpatrzeniu projektu będą podane w opisie priorytetu. Jeżeli w trakcie twożenia zostanie popełniony jakiś błąd system wyświetli odpowiedni komunikat.
+*/removeProject* | Delete project by id | Pozwala na usunięcie projektu po przez podanie numer id. Pole to jest polem kluczowym i nie może zostać puste. Jeżeli nie zostanie wypełnione system nam to pokaże. Jeżeli będzie inny błąd na ekranie zostanie pokazany odpowiedni komunikat co zrobiliśmy źle. Po wykonaniu operacji projekt zostanie na stałe usunięty.
+*/getByPriority* | Find project by priority | Pozwala na wyszukanie projektu za pomocą pola priority.name (nazwa priorytetu). Pole jest niezbędne do tego wyszukiwania. Jego brak zaznaczy nam system i każe je uzupełnić. Po wyszukaniu zostaną pokazane projekty, które mają przypisany wyszukiwany priorytet. Jeżeli zostanie popełniony błąd zostanie pokazany odpowiedni komunikat o błędzie.
+*/getByName* | Find project by name | Pozwoli nam znaleść projekt o odpowowiadającej nazwie do nazwy wyszukiwania. Pole name (nazwa) nie może zostać puste ponieważ jest kluczem. O braku wypełnienia poinformuje nas system przez zaznaczenie tego pola. Inne błędy będą informowane przez odpowiednie komunikaty. Po znalezieniu szukanego projektu zostaną wyświetlone informacje o nim.
+*/getById* | Find project by id | Wyszukanie za pomocą numeru id projektu. Jedynym polem wyszukiwania jest id, które nie może zostać puste. Brak wypełnienia zostanie zaznaczony. Popełnienie innego błędu będzie skutkowało pokazaniem odpowiedniego komunikatu. Jeżeli wyszukiwanie zakończy się sukcesem zostanie pokazany odpowiedni projekt z jego informacjami.
+*/getAll* | Find all project | Umożliwia wyświetlenie wszystkich projektów w systemie. Nie posiada żadnych pól kluczowych. 
+</br>
+
+

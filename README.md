@@ -108,5 +108,16 @@ Metoda | Funkcjonalność | Opis
 g)History controller 
 
 Metoda | Funkcjonalość | Opis
- --- | --- | ---
+ --- | --- | --- 
+*/saveHistoryWithAttachments* | Save history with attachments | Umożliwia utworzenie histori wraz z załącznikiem. Podczas wyszukiwania wpisujemy: attachments (załącznik, jego numer id), description (opis), type (typ, może być wewnętrzny lub zewnetrzny), user (użytkownik, nie może być zwykłym użytkownikiem systemu). Pole id jest dodawne automatycznie i nie trzeba go wpisywać. Jeżeli wystąpi błąd system nam to pokaże.
+*/saveHistory* | Save history | Pozwala na zapisanie histori tak jak w przypadku jak wyżej ale bez konieczności dodawania załącznika. Jaki kolwiek błąd zostanie pokazany przez system.
+*/removeHistoryById* | Delete history | Pozwala na usunięcie historii za pomocą numeru id. Pole to jest kluczowe i nie może zostać usunięte. Brak jego wypełnienia pokaże nam system. Inne błędy będą pokazywane przez odpowiednie komunikaty. Jeżeli wszystko będzie dobrze historia zostanie usunięte na stałe.
+*/getByUserAndDate* | Find by user and date | Pozwala na wyszukanie historii za pomocą pól date (data utworzenia) i user.id (numer id użytkownika). Pola te są kluczowe i muszą być wypełnione. Jaki kolwiek brak, którego z kolwiek zostanie polazany przez system. Inne błędy zostaną pokazane przez odpowiednie komunikaty. Gdy wszystko będzie ok zostanie pokazana historia utworzona przez danego użytkownika w danym dniu.
+*/getByUser* | Find history by user | Umożliwia wyszukanie historii po przez podanie user.id (numer id użytkownika). Pole to jest kluczem tego wyszukiwania i nie może zostać puste. Jeżeli zostanie popełniony inny błąd zostanie wyświetlony odpowiedni komunikat. Po zakończonym wyszukiwaniu zostanie pokazana historia stworzona przez odpowiedniego użytkownika.
+*/getById* | Find history by id | Umożliwia wyszukiwanie historii po przez podanie jej numeru id. Pole id jest polem obowiązkowym i musi być wpisane. Jeżeli zostanie popełniony inny błąd zostanie nam to pokazane w odpowiednim komunikacie. Gdy wyszukanie zostanie zakończone pokazana zostanie historia przypisana do odpowiedniego numeru id.
+*/getByDate* | Find history by date | Pozwala na zanlezienie histori za pomocą daty kiedy została utowrzona. Pole date (data) jest obowiązkowe i musi być wypełnione. Inny błąd także zostanie pokazany przez odpowiedni komunikat. 
+*/getAll* | Find all history | Umożliwia wyświetlenie wszystkich pozwoleń w systemie. Nie posiada żadnych pól kluczowych. 
+</br>
+
+
 

@@ -129,5 +129,9 @@ Metoda | Funkcjonalność | Opis
 */getAllBinaries* | Find all binary | Umożliwia wyświetlenie wszystkich pozwoleń w systemie. Nie posiada żadnych pól kluczowych.
 </br> 
 
+i)Attachment controller 
+
+Metoda | Funkcjonalność | Opis 
+ --- | --- | --- 
 
 

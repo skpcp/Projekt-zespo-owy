@@ -82,4 +82,17 @@ Metoda | Funkcjonalność | Opis
 */getByName* | Find priority by name | Pozwoli nam znaleść priorytet o odpowowiadającej nazwie do nazwy wyszukiwania. Pole name (nazwa) nie może zostać puste ponieważ jest kluczem. O braku wypełnienia poinformuje nas system przez zaznaczenie tego pola. Inne błędy będą informowane przez odpowiednie komunikaty. 
 */getAll* | Find all priorities | Umożliwia wyświetlenie wszystkich prirytetów w systemie. Nie posiada żadnych pól kluczowych. 
 */changePriorityName* | Update priority name | Pozwala na zmianę nazwy priorytetu po przez podanie numeru id a także nazwy pole (name). Nazwa zostanie zmieniona dla priorytetu, któremu odpowiada podany numer id. W przypadku błędu system nam to pokaże odpowiedni komunikat.
+</br>
+
+f)Permissions controller 
+
+Metoda | Funkcjonalność | Opis 
+ --- | --- | --- 
+*/savePermissions* | Save permission | Pozwala na zapisanie nowego pozwolenia(permission). Aby to zrobić należy podać nazwę tworzonego pozwolenia. Nie trzeba podawać numeru id ponieważ jest on zmieniany automatycznie. W przypdaku popełnienia jakiegoś błędu zostanie pokazany odpowiedni komunikat.
+*/removePermissionById* | Delete permission | Pozwala na usunięcie pozwolenia za pomocą numeru id. Pole to jest kluczowe i nie może zostać usunięte. Brak jego wypełnienia pokaże nam system. Inne błędy będą pokazywane przez odpowiednie komunikaty. Jeżeli wszystko będzie dobrze pozwolenie zostanie usunięte na stałe.
+*/getByName* | Find permission by name | Pozwoli nam znaleść pozwolenie po odpowowiadającej nazwie do nazwy wyszukiwania. Pole name (nazwa) nie może zostać puste ponieważ jest kluczem. O braku wypełnienia poinformuje nas system przez zaznaczenie tego pola. Inne błędy będą informowane przez odpowiednie komunikaty.
+*/getById* | Find permission by id | Wyszukanie za pomocą numeru id pozwolenia. Jedynym polem wyszukiwania jest id, które nie może zostać puste. Brak wypełnienia zostanie zaznaczony. Popełnienie innego błędu będzie skutkowało pokazaniem odpowiedniego komunikatu. Jeżeli wyszukiwanie zakończy się sukcesem zostanie pokazany odpowiednie pozwolenie.
+*/getAll* | Find all permission | Umożliwia wyświetlenie wszystkich pozwoleń w systemie. Nie posiada żadnych pól kluczowych.
+</br>
+
 

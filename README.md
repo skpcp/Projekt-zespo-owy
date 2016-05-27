@@ -67,6 +67,7 @@ c)Role controller
 
 Metoda | Funkcjonalość | Opis
  --- | --- | ---
+*/saveRole* | Save role | Pozwala na utworzenie nowej roli użytkownika. Przy tworzeniu nowej roli przypisaywane zostaje pozwolenie do tworzonej roli. Aby stworzyć role należy wpisać jej nazwę w polu name a także nadać odpowiednie pozwolenie czyli permission. Jeżeli zostanie popełniony jakiś błąd system pokaże nam o co chodzi aby go poprawić.
 */getByName* | Find role by name | Umożliwia wyszukanie roli po przez pole nazwa (name). Pole to jest pole kluczowym w tym przypadku wyszukiwania i nie może pozostać puste. W przypadku braku jego wypełnienia system upomni się o to. Jeżeli popełnimy jakiś błąd otrzymamy odpowiedni komunikat zwrotny. Wraz z wyszukaniem roli podane zostaną jej informacje.
 */getById* | Find role by id | Umożliwia wyszukanie roli po przez numer id. Pole to jest konieczne i nie może zostać puste. W przypadku popełnienia jakiegoś błędu system pokaże nam komunikat o nim. Po znalezieniu wpisanego id zostanie pokazana przypisana do niego rola.
 */getAll* | Find all role | Umożliwia wyświetlenie wszystkich roli w systemie. Nie posiada żadnych pól kluczowych. 

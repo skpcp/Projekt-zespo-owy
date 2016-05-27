@@ -133,5 +133,18 @@ i)Attachment controller
 
 Metoda | Funkcjonalność | Opis 
  --- | --- | --- 
+*/saveAttachment* | Save attachment | Aby dodać załącznik trzeba podać następujące pola: binary (wpisujemy id binaria do pliku, musi być wcześniej utworzone), file_name (nazwa pliku jaki zostanie przesłany przez załącznik), mine_type (wpisujemy własny typ problemu do załanczanego pliku), name (nazwa załącznika) oraz type (typ załącznika wewnetrzny lub zewnetrzny). Jedynym polem jakiego nie trzeba wpisywać jest id ponieważ nadawane jest automatycznie. Jeżeli zostanie popełniony jakiś błąd zostanie on pokazany przez odpowiedni komunikat. Po załączeniu załącznika zostaną pokazane informacje do niego przypisane.
+*/removeAttachmentById* | Delete attachment | Pozwala na usunięcie załącznika po przez podanie jego numeru id. Pole w czasie usuwania jest konieczne i nie może pozostać puste. Jego brak zostanie zaznaczony. Pozostałe błędy obsługują komunikaty. Po dobrym wykonaniu operacji załącznik zostanie usunięty na stałe.
+*/getByType* | Find attachment by type | Pozwala  na znalezienie załącznika za pomocą typu (pole type). W czasie tego wyszukiwania mamy do wyboru dwie opcjie wewnetrzny lub zewnetrzny. Jeżeli będzie jakiś błąd zostanie pokazany przez system na ekranie.
+*/getByName* | Find attachment by name | Umożliwia wyszukiwanie za pomocą nazwy załącznika (pole name). Pole to jest obowiązkowe co na to wskazuje musi być uzupełnione. Jeżeli w trakcie zostanie popełniony jakiś błąd zostanie pokazany odpowiedni komunikat.
+*/getByMineTypeAndName* | Find aatachment by mine type and name | Pozwala na wyszukanie załącznika za pomocą dwóch pól kluczowych. Polami tymi są mine_type (mój typ) i name (nazwa załącznika). Pola te muszą zostać podane. Jeżeli będą puste wyszukiwanie nie odbędzie się. Inne błedy obsłógują komunikaty.
+*/getByMineType* | Find attachments by mine type | Pozwala na znalezienie załącznika za pomocą pola mine_typ (typu wpisywanego przez użytkownika co jest nie tak z załącznikiem). Pole to jest nie zbędne do przeprowadzenia wyszukiwania a więc nie może pozostać puste. Jeżeli nie zostanie wpisane system nam to pokaże. Jeżeli popełnimy inny błąd system nam pokaże to w odpowiednim komunikacie.
+*/getByFileName* | Find attachments by file name | Możemy tu szukać załącznika za pomocą nazwy pliku (file_name). Pole to jest kluczowe wieć nie może być puste. Jeżeli pozostawimy je puste wyszukiwanie nie zacznie się. Jeżeli zostanie popełniony inny błąd system nam to pokaże co za tym idzie trzeba będzie poprawić wpisaną dane. 
+*/getAttachmentById* | Find attachmetn by id | Umożliwia wyszukiwanie załącznika po przez podanie jego numeru id. Pole id jest polem obowiązkowym i musi być wpisane. Jeżeli zostanie popełniony inny błąd zostanie nam to pokazane w odpowiednim komunikacie. Gdy wyszukanie zostanie zakończone pokazany zostanie załącznik przypisana do odpowiedniego numeru id. 
+*/getAllAtachments* | Find attachments | Umożliwia wyświetlenie wszystkich załączników w systemie. Nie posiada żadnych pól kluczowych.
+</br> 
+
+
+
 
 

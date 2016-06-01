@@ -1,31 +1,28 @@
 package com.uwm.projektz.history.dto;
 
-import com.uwm.projektz.attachment.dto.AttachmentDTO;
-import com.uwm.projektz.base.dto.BaseDTO;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.dto.UserDTO;
 import io.swagger.annotations.ApiModel;
 
-import java.util.Date;
+import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by wojni on 10.03.2016.
+ * Created by Tomasz Komoszeski on 2016-06-01.
  */
-
 @ApiModel
-public class HistoryDTO extends BaseDTO {
+public class HistoryDTOStringWithAttachments implements Serializable {
+    private Long id;
     private Type type;
-    private UserDTO user;
+    private String user;
     private String description;
     private String date;
-    private List<AttachmentDTO> attachments;
+    private List<Long> attachments;
 
-    public HistoryDTO() {
+    public HistoryDTOStringWithAttachments() {
     }
 
-    public HistoryDTO(Long id, Date techDate, Type type, UserDTO user, String description, String date, List<AttachmentDTO> attachments) {
-        super(id, techDate);
+    public HistoryDTOStringWithAttachments(Long id, Type type, String user, String description, String date, List<Long> attachments) {
+        this.id = id;
         this.type = type;
         this.user = user;
         this.description = description;
@@ -33,12 +30,12 @@ public class HistoryDTO extends BaseDTO {
         this.attachments = attachments;
     }
 
-    public HistoryDTO(Type type, UserDTO user, String description, String date, List<AttachmentDTO> attachments) {
-        this.type = type;
-        this.user = user;
-        this.description = description;
-        this.date = date;
-        this.attachments = attachments;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Type getType() {
@@ -49,11 +46,11 @@ public class HistoryDTO extends BaseDTO {
         this.type = type;
     }
 
-    public UserDTO getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(UserDTO user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -73,11 +70,11 @@ public class HistoryDTO extends BaseDTO {
         this.date = date;
     }
 
-    public List<AttachmentDTO> getAttachments() {
+    public List<Long> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<AttachmentDTO> attachments) {
+    public void setAttachments(List<Long> attachments) {
         this.attachments = attachments;
     }
 }

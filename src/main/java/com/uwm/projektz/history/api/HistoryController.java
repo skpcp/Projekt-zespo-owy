@@ -2,10 +2,10 @@ package com.uwm.projektz.history.api;
 
 import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.base.dto.ResponseDTO;
-import com.uwm.projektz.history.dto.HistoryDTO;
-import com.uwm.projektz.history.dto.HistoryDTOAttachments;
-import com.uwm.projektz.history.dto.HistoryDTOWithoutAttachment;
+import com.uwm.projektz.history.dto.*;
 import com.uwm.projektz.history.service.IHistoryService;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,9 +61,12 @@ public class HistoryController {
 
     @RequestMapping(value ="/saveHistory", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<HistoryDTO> saveHistory(@RequestBody HistoryDTOWithoutAttachment aHistory){
+    public ResponseEntity<HistoryDTO> saveHistory(@RequestBody HistoryDTOString aHistory){
+        DateTime jodaDate = aHistory.getDate() == null ? null : DateTime.parse(aHistory.getDate(), DateTimeFormat.forPattern("YYYY-MM-dd"));
+        Date date = jodaDate.toDate();
+        HistoryDTOWithoutAttachment pHistoryDTO = new HistoryDTOWithoutAttachment(aHistory.getId(),aHistory.getType(),aHistory.getUser(),aHistory.getDescription(),date);
         try{
-        return new ResponseEntity<>(historyService.saveHistory(aHistory),HttpStatus.OK);
+        return new ResponseEntity<>(historyService.saveHistory(pHistoryDTO),HttpStatus.OK);
         }catch (MyServerException e){
             return new ResponseEntity<>(e.getHeaders(),e.getStatus());
         }
@@ -71,9 +74,12 @@ public class HistoryController {
 
     @RequestMapping(value ="/saveHistoryWithAttachments", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<HistoryDTO> saveHistoryWithAttachments(@RequestBody HistoryDTOAttachments aHistory){
+    public ResponseEntity<HistoryDTO> saveHistoryWithAttachments(@RequestBody HistoryDTOStringWithAttachments aHistory){
+        DateTime jodaDate = aHistory.getDate() == null ? null : DateTime.parse(aHistory.getDate(), DateTimeFormat.forPattern("YYYY-MM-dd"));
+        Date date = jodaDate.toDate();
+        HistoryDTOAttachments pHistoryDTO = new HistoryDTOAttachments(aHistory.getId(),aHistory.getType(),aHistory.getUser(),aHistory.getDescription(),date,aHistory.getAttachments());
         try{
-            return new ResponseEntity<>(historyService.saveHistoryWithAttachments(aHistory),HttpStatus.OK);
+            return new ResponseEntity<>(historyService.saveHistoryWithAttachments(pHistoryDTO),HttpStatus.OK);
         }catch (MyServerException e){
             return new ResponseEntity<>(e.getHeaders(),e.getStatus());
         }

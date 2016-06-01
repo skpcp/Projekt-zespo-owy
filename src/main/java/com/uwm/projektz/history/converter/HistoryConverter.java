@@ -7,6 +7,7 @@ import com.uwm.projektz.history.dto.HistoryDTOWithoutAttachment;
 import com.uwm.projektz.history.ob.HistoryOB;
 import com.uwm.projektz.user.converter.UserConverter;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,9 @@ public class HistoryConverter {
 //History
     public static HistoryDTO converterHistoryOBtoDTO(HistoryOB aHistoryOB){
         if (aHistoryOB == null) return null;
-        return new HistoryDTO(aHistoryOB.getId(),aHistoryOB.getTechDate(),aHistoryOB.getType(), UserConverter.converterUserOBtoUserDTO(aHistoryOB.getUser()),aHistoryOB.getDescription(),aHistoryOB.getDate(), AttachmentConverter.converterAttachmentListOBtoDTO(aHistoryOB.getAttachments()));
+        SimpleDateFormat dzienFromat = new SimpleDateFormat("YYYY-MM-dd");
+        String dzien = dzienFromat.format(aHistoryOB.getDate());
+        return new HistoryDTO(aHistoryOB.getId(),aHistoryOB.getTechDate(),aHistoryOB.getType(), UserConverter.converterUserOBtoUserDTO(aHistoryOB.getUser()),aHistoryOB.getDescription(),dzien, AttachmentConverter.converterAttachmentListOBtoDTO(aHistoryOB.getAttachments()));
     }
 
 

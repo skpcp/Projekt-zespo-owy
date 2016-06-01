@@ -1,5 +1,6 @@
 package com.uwm.projektz.permission.service;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 
 import java.util.List;
@@ -17,5 +18,5 @@ public interface IPermissionService {
     PermissionDTO findByName(String aName);
 
     //DELETE
-    void deletePermissionById(Long aId);
+    void deletePermissionById(Long aId) throws MyServerException;
 }

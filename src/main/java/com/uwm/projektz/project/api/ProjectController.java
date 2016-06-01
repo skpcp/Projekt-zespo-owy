@@ -1,15 +1,14 @@
 package com.uwm.projektz.project.api;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.project.dto.ProjectDTOCreate;
 import com.uwm.projektz.project.dto.ProjectDTOName;
 import com.uwm.projektz.project.service.IProjectService;
-import com.uwm.projektz.user.dto.UserDTOLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -64,9 +63,14 @@ public class ProjectController {
 
     @RequestMapping(value="/removeProject/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteProjectById(@PathVariable("id") Long aId){
-        projectService.deleteProjectById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<ResponseDTO> deleteProjectById(@PathVariable("id") Long aId){
+        try{
+            projectService.deleteProjectById(aId);
+            return new ResponseEntity<>(new ResponseDTO("Project removed"),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+
     }
 
     @RequestMapping(value = "/changeNameForProject",method = RequestMethod.POST)

@@ -5,27 +5,20 @@ import io.swagger.annotations.ApiModel;
 import java.io.Serializable;
 
 /**
- * Created by Tomasz Komoszeski on 2016-05-14.
+ * Created by Tomasz Komoszeski on 2016-06-01.
  */
+
 @ApiModel
 public class UserDTOLogin implements Serializable {
-    private Long id;
     private String login;
+    private String password;
 
     public UserDTOLogin() {
     }
 
-    public UserDTOLogin(Long id, String login) {
-        this.id = id;
+    public UserDTOLogin(String login, String password) {
         this.login = login;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+        this.password = password;
     }
 
     public String getLogin() {
@@ -34,5 +27,13 @@ public class UserDTOLogin implements Serializable {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

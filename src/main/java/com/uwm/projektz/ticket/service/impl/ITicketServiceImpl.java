@@ -167,7 +167,10 @@ public class ITicketServiceImpl implements ITicketService {
     }
 
     @Override
-    public void deletTicketById(Long aId) {
+    public void deletTicketById(Long aId) throws MyServerException
+    {
+        TicketOB ticketOB = ticketRepository.findOne(aId);
+        if(ticketOB ==  null) throw  new MyServerException("Tciket not found",HttpStatus.NOT_FOUND);
         ticketRepository.delete(aId);
     }
 

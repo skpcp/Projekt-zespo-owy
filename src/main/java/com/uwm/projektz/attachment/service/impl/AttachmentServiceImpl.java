@@ -79,7 +79,9 @@ public class AttachmentServiceImpl implements IAttachmentSerivce {
     }
 
     @Override
-    public void deleteAttachmentById(Long aId) {
+    public void deleteAttachmentById(Long aId) throws MyServerException {
+        AttachmentOB attachmentOB = attachmentRepository.findOne(aId);
+        if(attachmentOB == null)  throw  new MyServerException("Attachment not found",HttpStatus.NOT_FOUND);
         attachmentRepository.delete(aId);
     }
 

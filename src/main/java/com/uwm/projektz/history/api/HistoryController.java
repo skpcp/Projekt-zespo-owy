@@ -1,6 +1,7 @@
 package com.uwm.projektz.history.api;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.history.dto.HistoryDTO;
 import com.uwm.projektz.history.dto.HistoryDTOAttachments;
 import com.uwm.projektz.history.dto.HistoryDTOWithoutAttachment;
@@ -81,10 +82,15 @@ public class HistoryController {
 
     @RequestMapping(value= "/removeHistoryById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteHistory(@PathVariable("id")Long aId)
+    public ResponseEntity<ResponseDTO> deleteHistory(@PathVariable("id")Long aId)
     {
-        historyService.deleteHistoryById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            historyService.deleteHistoryById(aId);
+            return new ResponseEntity<>(new ResponseDTO("history removed"),HttpStatus.OK);
+        } catch (MyServerException e) {
+            return new ResponseEntity<ResponseDTO>(e.getHeaders(),e.getStatus());
+        }
+
     }
 
 

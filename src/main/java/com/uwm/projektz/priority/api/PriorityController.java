@@ -1,6 +1,7 @@
 package com.uwm.projektz.priority.api;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.priority.dto.PriorityDTO;
 import com.uwm.projektz.priority.dto.PriorityDTOCreate;
 import com.uwm.projektz.priority.dto.PriorityDTOUpdateName;
@@ -51,10 +52,15 @@ public class PriorityController {
 //
     @RequestMapping(value= "/removePriority/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deletePriority(@PathVariable("id")Long aId)
+    public ResponseEntity<ResponseDTO> deletePriority(@PathVariable("id")Long aId)
     {
-        priorityService.deletePriority(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            priorityService.deletePriority(aId);
+            return new ResponseEntity<>(new ResponseDTO("Priority removed"),HttpStatus.OK);
+        } catch (MyServerException e) {
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+
     }
 
     @RequestMapping(value = "/changePriorityName",method = RequestMethod.POST)

@@ -4,7 +4,6 @@ import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.project.dto.ProjectDTO;
 import com.uwm.projektz.project.dto.ProjectDTOCreate;
 import com.uwm.projektz.project.dto.ProjectDTOName;
-import com.uwm.projektz.user.dto.UserDTOLogin;
 
 import java.util.List;
 
@@ -26,6 +25,6 @@ public interface IProjectService {
     List<ProjectDTO> findProjectsByPriority(String aName);
 
     //DELETE
-   void deleteProjectById(Long aId);
+   void deleteProjectById(Long aId) throws MyServerException;
 
 }

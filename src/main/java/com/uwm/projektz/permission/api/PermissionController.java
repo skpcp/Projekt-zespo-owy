@@ -1,5 +1,7 @@
 package com.uwm.projektz.permission.api;
 
+import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.permission.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +49,14 @@ public class PermissionController {
 
     @RequestMapping(value= "/removePermissionById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deletePermission(@PathVariable("id")Long aId)
+    public ResponseEntity<ResponseDTO> deletePermission(@PathVariable("id")Long aId)
     {
-        permissionService.deletePermissionById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            permissionService.deletePermissionById(aId);
+            return new ResponseEntity<>(new ResponseDTO("Permission deleted"),HttpStatus.OK);
+        } catch (MyServerException e) {
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+
     }
 }

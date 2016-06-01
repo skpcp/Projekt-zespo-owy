@@ -1,5 +1,6 @@
 package com.uwm.projektz.binary.service;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.binary.dto.BinaryDTO;
 import com.uwm.projektz.binary.dto.BinaryDTOCreate;
 
@@ -19,5 +20,5 @@ public interface IBinaryService {
 
 
     //DELETE
-    void deleteBinaryById(Long aId);
+    void deleteBinaryById(Long aId) throws MyServerException;
 }

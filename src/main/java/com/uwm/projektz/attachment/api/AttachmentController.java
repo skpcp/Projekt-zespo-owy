@@ -4,6 +4,7 @@ import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.attachment.dto.AttachmentDTOCreate;
 import com.uwm.projektz.attachment.service.IAttachmentSerivce;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.enums.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -78,10 +79,15 @@ public class AttachmentController {
 
     @RequestMapping(value= "/removeAttachmentById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteAttachment(@PathVariable("id")Long aId)
+    public ResponseEntity<ResponseDTO> deleteAttachment(@PathVariable("id")Long aId)
     {
-        attachmentService.deleteAttachmentById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            attachmentService.deleteAttachmentById(aId) ;
+            return new ResponseEntity<>(new ResponseDTO("Attachment removed"),HttpStatus.OK);
+        } catch (MyServerException e) {
+           return new ResponseEntity<ResponseDTO>(e.getHeaders(),e.getStatus());
+        }
+
     }
 
 }

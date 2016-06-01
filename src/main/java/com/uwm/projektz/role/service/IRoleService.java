@@ -20,5 +20,5 @@ public interface IRoleService {
 
     //DELETE
     //usuwanie permission z listy
-    void deleteRoleById(Long aId);
+    void deleteRoleById(Long aId) throws MyServerException;
 }

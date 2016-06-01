@@ -71,7 +71,10 @@ public class RoleServiceImpl implements IRoleService {
     }
 
     @Override
-    public void deleteRoleById(Long aId) {
+    public void deleteRoleById(Long aId) throws MyServerException
+    {
+        RoleOB role = roleRepository.findOne(aId);
+        if(role == null) throw new MyServerException("Role not found",HttpStatus.NOT_FOUND);
         roleRepository.delete(aId);
     }
 }

@@ -1,6 +1,7 @@
 package com.uwm.projektz.role.api;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.role.dto.RoleDTO;
 import com.uwm.projektz.role.dto.RoleDTOCreate;
@@ -52,11 +53,16 @@ public class RoleController {
         }
     }
 
-    @RequestMapping(value= "/removeRoleById/{id}",method = RequestMethod.DELETE)
+    @RequestMapping(value= "/removeRoleById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<RoleDTO> deleteRole(@PathVariable("id")Long aId)
+    public ResponseEntity<ResponseDTO> deleteRole(@PathVariable("id")Long aId)
     {
+        try{
         roleService.deleteRoleById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(new ResponseDTO("Role removed"),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+
     }
 }

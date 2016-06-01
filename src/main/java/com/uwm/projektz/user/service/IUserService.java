@@ -24,14 +24,16 @@ public interface IUserService {
     List<UserDTO> findUsersBySurname(String aSurname);
     List<UserDTO> findUsersByNameAndSurname(String aName, String aSurname);
     List<UserDTO> findUsersByRole(String aRole);
+    UserDTO loginUser(UserDTOLogin aUserDTO) throws MyServerException;
 
     //UPDATE
     UserDTO updateUserActivity(UserDTOActive aUserDTO) throws MyServerException;
-    UserDTO updateUserLogin(UserDTOLogin aUserDTO) throws MyServerException;
+    UserDTO updateUserLogin(UserDTOLoginChange aUserDTO) throws MyServerException;
     UserDTO updateUserEmail(UserDTOEmail aUserDTO) throws MyServerException;
     UserDTO updateUserRole(UserDTORole aUserDTO) throws MyServerException;
     UserDTO updatePermissionsListForUser(UserDTOPermissions aUserDTO) throws MyServerException;
     UserDTO updateProjectListForUser(UserDTOProjects aUserDTO) throws MyServerException;
+    UserDTO updateUserPasswor(UserDTOPasswordChange aUserDTO) throws MyServerException;
 
     //DELETE
     void deletUser(Long aId) throws  MyServerException;

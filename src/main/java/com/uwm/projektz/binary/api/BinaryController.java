@@ -1,5 +1,7 @@
 package com.uwm.projektz.binary.api;
 
+import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.binary.dto.BinaryDTO;
 import com.uwm.projektz.binary.dto.BinaryDTOCreate;
 import com.uwm.projektz.binary.service.IBinaryService;
@@ -41,9 +43,14 @@ public class BinaryController {
 
     @RequestMapping(value= "/removeBinaryById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteBinary(@PathVariable("id")Long aId)
+    public ResponseEntity<ResponseDTO> deleteBinary(@PathVariable("id")Long aId)
     {
-        binaryService.deleteBinaryById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
+        try {
+            binaryService.deleteBinaryById(aId);
+            return new ResponseEntity<>(new ResponseDTO("Binary deleted"),HttpStatus.OK);
+        } catch (MyServerException e) {
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+
     }
 }

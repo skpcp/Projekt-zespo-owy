@@ -2,6 +2,7 @@ package com.uwm.projektz.ticket.api;
 
 import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.attachment.dto.AttachmentDTO;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.history.dto.HistoryDTO;
@@ -97,10 +98,15 @@ public class TicketController {
 
     @RequestMapping(value="/removeTicketById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteTicket(@PathVariable("id") Long aId){
-        ticketService.deletTicketById(aId);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
+    public ResponseEntity<ResponseDTO> deleteTicket(@PathVariable("id") Long aId){
+        try{
+            ticketService.deletTicketById(aId);
+            return new ResponseEntity<ResponseDTO>(new ResponseDTO("Ticket removed"),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+
+}
 
     @RequestMapping(value = "/addHistoryToTicket",method = RequestMethod.POST)
     @ResponseBody

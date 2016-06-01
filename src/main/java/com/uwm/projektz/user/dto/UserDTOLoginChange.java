@@ -7,20 +7,13 @@ import java.io.Serializable;
 /**
  * Created by Tomasz Komoszeski on 2016-05-14.
  */
-
 @ApiModel
-public class UserDTOEmail implements Serializable {
+public class UserDTOLoginChange implements Serializable {
     private Long id;
-    private String email;
+    private String login;
     private String password;
 
-    public UserDTOEmail() {
-    }
-
-    public UserDTOEmail(Long id, String email, String password) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
+    public UserDTOLoginChange() {
     }
 
     public Long getId() {
@@ -31,12 +24,12 @@ public class UserDTOEmail implements Serializable {
         this.id = id;
     }
 
-    public String getEmail() {
-        return email;
+    public String getLogin() {
+        return login;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getPassword() {

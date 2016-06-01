@@ -22,5 +22,5 @@ public interface IPriorityService  {
     PriorityDTO findByName(String aName);
 
     //DELETE
-    void deletePriority(Long aId);
+    void deletePriority(Long aId) throws MyServerException;
 }

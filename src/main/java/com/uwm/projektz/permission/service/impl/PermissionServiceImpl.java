@@ -1,11 +1,13 @@
 package com.uwm.projektz.permission.service.impl;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.permission.converter.PermissionConverter;
 import com.uwm.projektz.permission.dto.PermissionDTO;
 import com.uwm.projektz.permission.ob.PermissionOB;
 import com.uwm.projektz.permission.repository.IPermissionRepository;
 import com.uwm.projektz.permission.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,7 +47,9 @@ public class PermissionServiceImpl implements IPermissionService {
     }
 
     @Override
-    public void deletePermissionById(Long aId) {
+    public void deletePermissionById(Long aId) throws MyServerException {
+        PermissionOB permissionOB = permissionRepository.findOne(aId);
+        if(permissionOB == null) throw new MyServerException("Permission not found", HttpStatus.NOT_FOUND);
         permissionRepository.delete(aId);
     }
 }

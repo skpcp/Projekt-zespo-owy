@@ -1,6 +1,7 @@
 package com.uwm.projektz.user.api;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.user.dto.*;
 import com.uwm.projektz.user.service.IUserService;
 
@@ -8,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -107,7 +107,7 @@ public class UserController {
 
     @RequestMapping(value="/changeLogin", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<UserDTO> updateUserLogin(@RequestBody UserDTOLogin aUserDTO){
+    public ResponseEntity<UserDTO> updateUserLogin(@RequestBody UserDTOLoginChange aUserDTO){
         try {
             return new ResponseEntity<>(userService.updateUserLogin(aUserDTO),HttpStatus.OK);
         }catch (MyServerException e) {
@@ -154,12 +154,12 @@ public class UserController {
     //DELETE
    @RequestMapping(value="/removeUserById/{id}",method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Long aId){
+    public ResponseEntity<ResponseDTO> deleteUser(@PathVariable("id") Long aId){
        try {
            userService.deletUser(aId);
-           return new ResponseEntity<>(HttpStatus.OK);
+           return new ResponseEntity<>(new ResponseDTO("Usunięto"),HttpStatus.OK);
        }catch (MyServerException e){
-           return new ResponseEntity<Void>(e.getHeaders(),e.getStatus());
+           return new ResponseEntity<>(e.getHeaders(),e.getStatus());
        }
 
     }
@@ -176,5 +176,24 @@ public class UserController {
 
     }
 
+    @RequestMapping(value="/changePasswordForUser",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<UserDTO> changePasswordUser(@RequestBody UserDTOPasswordChange aUserDTO){
+        try {
+            return new ResponseEntity<UserDTO>(userService.updateUserPasswor(aUserDTO), HttpStatus.OK);
+        }
+        catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+    }
 
+    @RequestMapping(value="/userLogin",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<UserDTO> loginUser(@RequestBody UserDTOLogin aUserDTO){
+        try{
+            return new ResponseEntity<>(userService.loginUser(aUserDTO),HttpStatus.OK);
+        }catch (MyServerException e){
+            return new ResponseEntity<>(e.getHeaders(),e.getStatus());
+        }
+    }
 }

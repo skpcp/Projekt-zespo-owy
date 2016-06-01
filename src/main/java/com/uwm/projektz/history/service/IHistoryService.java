@@ -29,5 +29,5 @@ public interface IHistoryService  {
 
     //DELETE
     //usuwanie attachmentow ,
-    void deleteHistoryById(Long aId);
+    void deleteHistoryById(Long aId) throws MyServerException;
 }

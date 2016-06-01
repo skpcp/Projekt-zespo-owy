@@ -1,5 +1,6 @@
 package com.uwm.projektz.binary.service.impl;
 
+import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.binary.converter.BinaryConverter;
 import com.uwm.projektz.binary.dto.BinaryDTO;
 import com.uwm.projektz.binary.dto.BinaryDTOCreate;
@@ -7,6 +8,7 @@ import com.uwm.projektz.binary.ob.BinaryOB;
 import com.uwm.projektz.binary.repository.IBinaryRepository;
 import com.uwm.projektz.binary.service.IBinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,7 +45,10 @@ public class BinaryServiceImpl implements IBinaryService {
     }
 
     @Override
-    public void deleteBinaryById(Long aId) {
+    public void deleteBinaryById(Long aId) throws MyServerException
+    {
+        BinaryOB binaryOB = binaryRepository.findOne(aId);
+        if(binaryOB == null) throw new MyServerException("Binary not found", HttpStatus.NOT_FOUND);
         binaryRepository.delete(aId);
     }
 }

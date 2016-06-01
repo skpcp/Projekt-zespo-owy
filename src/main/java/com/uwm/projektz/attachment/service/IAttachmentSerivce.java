@@ -23,6 +23,6 @@ public interface IAttachmentSerivce {
     List<AttachmentDTO> findAAtachemntByMineTypeAndName(String aMineType,String aName);
     List<AttachmentDTO> findAttachmentByType(Type aType);
     //DELETE
-    void deleteAttachmentById(Long aId);
+    void deleteAttachmentById(Long aId) throws MyServerException;
 
 }

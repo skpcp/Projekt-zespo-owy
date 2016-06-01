@@ -10,8 +10,6 @@ import com.uwm.projektz.project.dto.ProjectDTOName;
 import com.uwm.projektz.project.ob.ProjectOB;
 import com.uwm.projektz.project.repository.IProjectRepository;
 import com.uwm.projektz.project.service.IProjectService;
-import com.uwm.projektz.user.dto.UserDTOLogin;
-import com.uwm.projektz.user.ob.UserOB;
 import com.uwm.projektz.user.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +36,9 @@ public class ProjectServiceImpl implements IProjectService {
     IUserRepository userRepository;
 
     @Override
-    public void deleteProjectById(Long aId) {
+    public void deleteProjectById(Long aId) throws MyServerException {
+        ProjectOB projectOB = projectRepository.findOne(aId);
+        if(projectOB == null) throw new MyServerException("Project not found",HttpStatus.NOT_FOUND);
         projectRepository.delete(aId);
     }
 

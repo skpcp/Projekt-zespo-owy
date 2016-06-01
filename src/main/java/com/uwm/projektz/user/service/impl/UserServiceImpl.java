@@ -123,22 +123,25 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
-    public UserDTO updateUserLogin(UserDTOLogin aUserDTO) throws MyServerException {
+    public UserDTO updateUserLogin(UserDTOLoginChange aUserDTO) throws MyServerException {
         UserOB user = aUserDTO.getId() == null ? null : userRepository.findOne(aUserDTO.getId());
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        UserOB userLogin = aUserDTO.getLogin() == null ? null : userRepository.findUserByLogin(aUserDTO.getLogin());
+        UserOB userLogin = aUserDTO.getLogin() == null ? null  : userRepository.findUserByLogin(aUserDTO.getLogin());
         if(userLogin != null) throw  new MyServerException("User with that login exists", HttpStatus.METHOD_NOT_ALLOWED); //nie moze byc uzytkownika o takim samym loginie
+        if(aUserDTO.getPassword().hashCode() != user.getMd5pass().hashCode()) throw new MyServerException("Password dont match",HttpStatus.METHOD_NOT_ALLOWED);
         user.setLogin(aUserDTO.getLogin());
         return UserConverter.converterUserOBtoUserDTO(userRepository.save(user));
     }
 
     @Override
-    public UserDTO updateUserEmail(UserDTOEmail aUserDTOEmail) throws MyServerException{
-        UserOB user = aUserDTOEmail.getId() == null ? null : userRepository.findOne(aUserDTOEmail.getId());
+    public UserDTO updateUserEmail(UserDTOEmail aUserDTO) throws MyServerException{
+        UserOB user = aUserDTO.getId() == null ? null : userRepository.findOne(aUserDTO.getId());
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        UserOB userEmail = aUserDTOEmail.getEmail() == null ? null : userRepository.findUserByEmail(aUserDTOEmail.getEmail());
+        UserOB userEmail = aUserDTO.getEmail() == null ? null : userRepository.findUserByEmail(aUserDTO.getEmail());
         if(userEmail != null) throw new MyServerException("User with that email exists",HttpStatus.METHOD_NOT_ALLOWED);//nie może być drugi taki sam;
-        user.setEmail(aUserDTOEmail.getEmail());
+        if(aUserDTO.getPassword() == null) throw  new MyServerException("Password not found",HttpStatus.NOT_FOUND);
+        if(aUserDTO.getPassword().hashCode() != user.getMd5pass().hashCode()) throw new MyServerException("Password dont match",HttpStatus.METHOD_NOT_ALLOWED);
+        user.setEmail(aUserDTO.getEmail());
         return UserConverter.converterUserOBtoUserDTO(userRepository.save(user));
     }
 
@@ -184,7 +187,31 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public void deletUser(Long aId) {
+    public void deletUser(Long aId) throws MyServerException {
+        UserOB user = userRepository.findOne(aId);
+        if(user == null) throw new MyServerException("User with this id not exists",HttpStatus.NOT_FOUND);
         userRepository.delete(aId);
+    }
+
+
+    @Override
+    public UserDTO loginUser(UserDTOLogin aUserDTO) throws MyServerException {
+        UserOB user = aUserDTO.getLogin() == null ? null : userRepository.findUserByLogin(aUserDTO.getLogin());
+        if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
+        if(aUserDTO.getPassword() == null) throw new  MyServerException("Password not found",HttpStatus.NOT_FOUND);
+        if(user.getMd5pass().hashCode() != aUserDTO.getPassword().hashCode()) throw new MyServerException("Password dont match",HttpStatus.METHOD_NOT_ALLOWED);
+        return UserConverter.converterUserOBtoUserDTO(user);
+    }
+
+    @Override
+    public UserDTO updateUserPasswor(UserDTOPasswordChange aUserDTO) throws MyServerException {
+        UserOB user = aUserDTO.getId() == null ? null : userRepository.findOne(aUserDTO.getId());
+        if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
+        if(aUserDTO.getOldPassword() == null || aUserDTO.getNewPassword() == null) throw new  MyServerException("Password not found",HttpStatus.NOT_FOUND);
+        if(user.getMd5pass() == null) user.setMd5pass(aUserDTO.getNewPassword());
+        if(user.getMd5pass().hashCode() != aUserDTO.getOldPassword().hashCode()) throw new MyServerException("Password dont match",HttpStatus.METHOD_NOT_ALLOWED);
+        user.setMd5pass(aUserDTO.getNewPassword());
+        userRepository.save(user);
+        return UserConverter.converterUserOBtoUserDTO(user);
     }
 }

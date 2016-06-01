@@ -67,7 +67,10 @@ public class PriorityServiceImpl implements IPriorityService {
     }
 
     @Override
-    public void deletePriority(Long aId) {
+    public void deletePriority(Long aId) throws MyServerException
+    {
+        PriorityOB priorityOB = priorityRepository.findOne(aId);
+        if(priorityOB == null) throw new MyServerException("Priority not found",HttpStatus.NOT_FOUND);
         priorityRepository.delete(aId);
     }
 }

@@ -116,7 +116,10 @@ public class HistoryServiceImpl implements IHistoryService{
 
 
     @Override
-    public void deleteHistoryById(Long aId) {
+    public void deleteHistoryById(Long aId) throws MyServerException
+    {
+        HistoryOB historyOB = historyRepository.findOne(aId);
+        if(historyOB == null) throw new MyServerException("history not found",HttpStatus.NOT_FOUND);
         historyRepository.delete(aId);
     }
 }

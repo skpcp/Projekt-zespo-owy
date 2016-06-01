@@ -38,5 +38,5 @@ public interface ITicketService {
 
     //DELETE
     //attachemnty-z historia //historia z attachmentem  remove casscade
-    void deletTicketById(Long aId);
+    void deletTicketById(Long aId) throws MyServerException;
 }

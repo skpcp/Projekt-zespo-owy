@@ -1,6 +1,7 @@
 package com.uwm.projektz.ticket.service.impl;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.attachment.dto.AttachmentDTOtoAdd;
 import com.uwm.projektz.attachment.ob.AttachmentOB;
 import com.uwm.projektz.attachment.repository.IAttachmentRepository;
 import com.uwm.projektz.enums.TicketType;
@@ -92,8 +93,8 @@ public class ITicketServiceImpl implements ITicketService {
         if(priorityOB == null) throw  new MyServerException("Priority not found",HttpStatus.NOT_FOUND);
 
         List<AttachmentOB> attachmentOBList = new ArrayList<>();
-        for(Long attachment : aTicketDTO.getAttachments()){
-            AttachmentOB attachmentOB = attachmentRepository.findOne(attachment);
+        for(AttachmentDTOtoAdd attachment : aTicketDTO.getAttachments()){
+            AttachmentOB attachmentOB = attachment.getId() == null ? null : attachmentRepository.findOne(attachment.getId());
             if(attachmentOB == null) throw new MyServerException("Attachment not found",HttpStatus.NOT_FOUND);
             attachmentOBList.add(attachmentOB);
         }

@@ -1,6 +1,7 @@
 package com.uwm.projektz.ticket.dto;
 
 
+import com.uwm.projektz.attachment.dto.AttachmentDTOtoAdd;
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
 
@@ -21,12 +22,12 @@ public class TicketDTOAttachments implements Serializable {
     private String user;
     private String priority;
     private String project;
-    private List<Long> attachments;
+    private List<AttachmentDTOtoAdd> attachments;
 
     public TicketDTOAttachments() {
     }
 
-    public TicketDTOAttachments(Long id, TicketType kind, Type type, String description, String user, String priority, String project, List<Long> attachments) {
+    public TicketDTOAttachments(Long id, TicketType kind, Type type, String description, String user, String priority, String project, List<AttachmentDTOtoAdd> attachments) {
         this.id = id;
         this.kind = kind;
         this.type = type;
@@ -93,11 +94,11 @@ public class TicketDTOAttachments implements Serializable {
         this.project = project;
     }
 
-    public List<Long> getAttachments() {
+    public List<AttachmentDTOtoAdd> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<Long> attachments) {
+    public void setAttachments(List<AttachmentDTOtoAdd> attachments) {
         this.attachments = attachments;
     }
 }

@@ -4,6 +4,7 @@ import com.uwm.projektz.permission.ob.PermissionOB;
 import com.uwm.projektz.permission.repository.IPermissionRepository;
 import com.uwm.projektz.priority.ob.PriorityOB;
 import com.uwm.projektz.priority.repository.IPriorityRepository;
+import com.uwm.projektz.project.ob.ProjectOB;
 import com.uwm.projektz.project.repository.IProjectRepository;
 import com.uwm.projektz.role.ob.RoleOB;
 import com.uwm.projektz.role.repository.IRoleRepository;
@@ -26,9 +27,11 @@ public class ProjektzApplication {
 	}
 
 	@Bean
-	public CommandLineRunner init(IPermissionRepository permissionRepository, IRoleRepository roleRepository, IUserRepository userRepository, IPriorityRepository priorityRepository){
+	public CommandLineRunner init(IPermissionRepository permissionRepository, IRoleRepository roleRepository, IUserRepository userRepository, IPriorityRepository priorityRepository,IProjectRepository projectRepository){
 		List<PermissionOB> permissionOBList = new ArrayList<>();
 		List<RoleOB> roleOBList = new ArrayList<>();
+		PriorityOB priorityOB = new PriorityOB("Natychmiast","20 lat");
+		ProjectOB projectOB = new ProjectOB("Firma","abcd","1.0",priorityOB);
 		if(permissionRepository.count() == 0){
 			//zapisz podstawowe uprawnienia
 			permissionOBList.add(new PermissionOB("PERMISSION1"));
@@ -55,12 +58,29 @@ public class ProjektzApplication {
 			roleOBList.add(new RoleOB("USER",permissionOBListforRole));
 			roleRepository.save(roleOBList);
 		}
-		if(userRepository.count() == 0){
-			userRepository.save(new UserOB("Gandalf","Gray","gandalf@middleearth","GandalfTheGray","12345",true,roleOBList.get(0),null,null));
-		}
+
 		if(priorityRepository.count() == 0){
-			priorityRepository.save(new PriorityOB("Natychmiast","20 lat"));
+			priorityRepository.save(priorityOB);
 		}
+
+		if(projectRepository.count() == 0){
+			projectRepository.save(projectOB);
+		}
+		List<ProjectOB> projectList = new ArrayList<>();
+		projectList.add(projectOB);
+		List<UserOB> users = new ArrayList<>();
+		users.add(new UserOB("Gandalf","Gray","gandalf@middleearth","GandalfTheGray","12345",true,roleOBList.get(0),projectList,null));
+		users.add(new UserOB("Janusz","Nowak","admin","admin","12345",true,roleOBList.get(0),projectList,null));
+
+
+
+		if(userRepository.count() == 0){
+			userRepository.save(users.get(0));
+			userRepository.save(users.get(1));
+		}
+
+
+
 
 		return null;
 	}

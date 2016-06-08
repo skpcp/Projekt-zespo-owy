@@ -4,10 +4,8 @@ package com.uwm.projektz.attachment.ob;
 import com.uwm.projektz.base.ob.BaseOB;
 import com.uwm.projektz.enums.Type;
 import com.uwm.projektz.binary.ob.BinaryOB;
-import com.uwm.projektz.user.ob.UserOB;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Created by wojni on 11.03.2016.

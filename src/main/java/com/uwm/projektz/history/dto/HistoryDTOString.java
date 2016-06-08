@@ -1,12 +1,9 @@
 package com.uwm.projektz.history.dto;
 
-import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.dto.UserDTO;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by Tomasz Komoszeski on 2016-06-01.
@@ -18,14 +15,13 @@ public class HistoryDTOString implements Serializable {
     private Type type;
     private String user;
     private String description;
-    private String date;
 
-    public HistoryDTOString(Long id, Type type, String user, String description, String date) {
+
+    public HistoryDTOString(Long id, Type type, String user, String description) {
         this.id = id;
         this.type = type;
         this.user = user;
         this.description = description;
-        this.date = date;
     }
 
     public HistoryDTOString() {
@@ -63,11 +59,5 @@ public class HistoryDTOString implements Serializable {
         this.description = description;
     }
 
-    public String getDate() {
-        return date;
-    }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
 }

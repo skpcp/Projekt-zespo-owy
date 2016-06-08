@@ -11,7 +11,6 @@ import com.uwm.projektz.user.ob.UserOB;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

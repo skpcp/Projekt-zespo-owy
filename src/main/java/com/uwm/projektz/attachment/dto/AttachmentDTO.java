@@ -3,7 +3,6 @@ package com.uwm.projektz.attachment.dto;
 import com.uwm.projektz.base.dto.BaseDTO;
 import com.uwm.projektz.binary.dto.BinaryDTO;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.dto.UserDTO;
 import io.swagger.annotations.ApiModel;
 
 import java.util.Date;

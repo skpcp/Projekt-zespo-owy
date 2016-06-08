@@ -2,7 +2,6 @@ package com.uwm.projektz.ticket.repository;
 
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.priority.ob.PriorityOB;
 import com.uwm.projektz.ticket.ob.TicketOB;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

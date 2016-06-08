@@ -62,8 +62,7 @@ public class HistoryController {
     @RequestMapping(value ="/saveHistory", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<HistoryDTO> saveHistory(@RequestBody HistoryDTOString aHistory){
-        DateTime jodaDate = aHistory.getDate() == null ? null : DateTime.parse(aHistory.getDate(), DateTimeFormat.forPattern("YYYY-MM-dd"));
-        Date date = jodaDate.toDate();
+        Date date = new Date();
         HistoryDTOWithoutAttachment pHistoryDTO = new HistoryDTOWithoutAttachment(aHistory.getId(),aHistory.getType(),aHistory.getUser(),aHistory.getDescription(),date);
         try{
         return new ResponseEntity<>(historyService.saveHistory(pHistoryDTO),HttpStatus.OK);
@@ -75,8 +74,7 @@ public class HistoryController {
     @RequestMapping(value ="/saveHistoryWithAttachments", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
     public ResponseEntity<HistoryDTO> saveHistoryWithAttachments(@RequestBody HistoryDTOStringWithAttachments aHistory){
-        DateTime jodaDate = aHistory.getDate() == null ? null : DateTime.parse(aHistory.getDate(), DateTimeFormat.forPattern("YYYY-MM-dd"));
-        Date date = jodaDate.toDate();
+        Date date = new Date();
         HistoryDTOAttachments pHistoryDTO = new HistoryDTOAttachments(aHistory.getId(),aHistory.getType(),aHistory.getUser(),aHistory.getDescription(),date,aHistory.getAttachments());
         try{
             return new ResponseEntity<>(historyService.saveHistoryWithAttachments(pHistoryDTO),HttpStatus.OK);

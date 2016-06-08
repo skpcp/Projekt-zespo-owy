@@ -1,10 +1,8 @@
 package com.uwm.projektz.ticket.service;
 
 import com.uwm.projektz.MyServerException;
-import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.history.dto.HistoryDTO;
 import com.uwm.projektz.ticket.dto.TicketDTO;
 import com.uwm.projektz.ticket.dto.TicketDTOAttachments;
 import com.uwm.projektz.ticket.dto.TicketDTOHistory;

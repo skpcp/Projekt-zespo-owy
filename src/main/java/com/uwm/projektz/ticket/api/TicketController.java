@@ -1,12 +1,9 @@
 package com.uwm.projektz.ticket.api;
 
 import com.uwm.projektz.MyServerException;
-import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.base.dto.ResponseDTO;
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.history.dto.HistoryDTO;
-import com.uwm.projektz.priority.dto.PriorityDTO;
 import com.uwm.projektz.ticket.dto.TicketDTO;
 import com.uwm.projektz.ticket.dto.TicketDTOAttachments;
 import com.uwm.projektz.ticket.dto.TicketDTOHistory;
@@ -15,10 +12,8 @@ import com.uwm.projektz.ticket.service.ITicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.File;
 import java.util.List;
 
 

@@ -4,6 +4,7 @@ import com.uwm.projektz.enums.Type;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

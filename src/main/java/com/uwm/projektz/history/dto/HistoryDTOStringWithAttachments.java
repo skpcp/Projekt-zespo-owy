@@ -15,18 +15,16 @@ public class HistoryDTOStringWithAttachments implements Serializable {
     private Type type;
     private String user;
     private String description;
-    private String date;
     private List<Long> attachments;
 
     public HistoryDTOStringWithAttachments() {
     }
 
-    public HistoryDTOStringWithAttachments(Long id, Type type, String user, String description, String date, List<Long> attachments) {
+    public HistoryDTOStringWithAttachments(Long id, Type type, String user, String description, List<Long> attachments) {
         this.id = id;
         this.type = type;
         this.user = user;
         this.description = description;
-        this.date = date;
         this.attachments = attachments;
     }
 
@@ -60,14 +58,6 @@ public class HistoryDTOStringWithAttachments implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
     }
 
     public List<Long> getAttachments() {

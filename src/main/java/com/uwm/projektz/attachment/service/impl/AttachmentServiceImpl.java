@@ -10,7 +10,6 @@ import com.uwm.projektz.attachment.service.IAttachmentSerivce;
 import com.uwm.projektz.binary.ob.BinaryOB;
 import com.uwm.projektz.binary.repository.IBinaryRepository;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.user.ob.UserOB;
 import com.uwm.projektz.user.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

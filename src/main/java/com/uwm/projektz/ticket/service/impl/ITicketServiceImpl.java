@@ -1,13 +1,10 @@
 package com.uwm.projektz.ticket.service.impl;
 
 import com.uwm.projektz.MyServerException;
-import com.uwm.projektz.attachment.dto.AttachmentDTO;
 import com.uwm.projektz.attachment.ob.AttachmentOB;
 import com.uwm.projektz.attachment.repository.IAttachmentRepository;
 import com.uwm.projektz.enums.TicketType;
 import com.uwm.projektz.enums.Type;
-import com.uwm.projektz.history.converter.HistoryConverter;
-import com.uwm.projektz.history.dto.HistoryDTO;
 import com.uwm.projektz.history.ob.HistoryOB;
 import com.uwm.projektz.history.repository.IHistoryRepository;
 import com.uwm.projektz.priority.ob.PriorityOB;

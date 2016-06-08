@@ -1,6 +1,7 @@
 package com.uwm.projektz.history.service.impl;
 
 import com.uwm.projektz.MyServerException;
+import com.uwm.projektz.attachment.dto.AttachmentDTOtoAdd;
 import com.uwm.projektz.attachment.ob.AttachmentOB;
 import com.uwm.projektz.attachment.repository.IAttachmentRepository;
 import com.uwm.projektz.attachment.service.IAttachmentSerivce;
@@ -53,12 +54,14 @@ public class HistoryServiceImpl implements IHistoryService{
         if(historyOB == null) {
             historyOB = HistoryConverter.converterHistoryDTOWithoutAttachmentToHistoryOB(aHistoryDTO);
             historyOB.setUser(userOB);
+            historyOB.setDate(new Date());
             return HistoryConverter.converterHistoryOBtoDTO(historyRepository.save(historyOB));
         }
         //jezeli istnieje
         historyOB.setDescription(aHistoryDTO.getDescription());
         historyOB.setType(aHistoryDTO.getType());
         historyOB.setTechDate(new Date());
+        historyOB.setDate(new Date());
         return HistoryConverter.converterHistoryOBtoDTO(historyRepository.save(historyOB));
     }
 
@@ -68,8 +71,8 @@ public class HistoryServiceImpl implements IHistoryService{
         if(userOB == null) throw new MyServerException("User not found", HttpStatus.NOT_FOUND);
         List<AttachmentOB> attachmentOBList = new ArrayList<>();
         if(aHistoryDTO.getAttachments() == null) throw  new MyServerException("Attachments field not found",HttpStatus.NOT_FOUND);
-        for(Long attachment : aHistoryDTO.getAttachments()){
-            AttachmentOB attachmentOB = attachmentRepository.findOne(attachment);
+        for(AttachmentDTOtoAdd attachment : aHistoryDTO.getAttachments()){
+            AttachmentOB attachmentOB = attachment == null ? null : attachmentRepository.findOne(attachment.getId());
             if(attachmentOB == null) throw new MyServerException("Attachment not found",HttpStatus.NOT_FOUND);
             attachmentOBList.add(attachmentOB);
         }
@@ -79,6 +82,7 @@ public class HistoryServiceImpl implements IHistoryService{
             historyOB = HistoryConverter.converterHistoryDTOAttachmentsToHistoryOB(aHistoryDTO);
             historyOB.setUser(userOB);
             historyOB.setAttachments(attachmentOBList);
+            historyOB.setDate(new Date());
             return HistoryConverter.converterHistoryOBtoDTO(historyRepository.save(historyOB));
         }
         //jezeli istnieje
@@ -86,6 +90,7 @@ public class HistoryServiceImpl implements IHistoryService{
         historyOB.setDescription(aHistoryDTO.getDescription());
         historyOB.setType(aHistoryDTO.getType());
         historyOB.setTechDate(new Date());
+        historyOB.setDate(new Date());
         return HistoryConverter.converterHistoryOBtoDTO(historyRepository.save(historyOB));
     }
 

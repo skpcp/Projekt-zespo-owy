@@ -73,11 +73,9 @@ public class HistoryController {
 
     @RequestMapping(value ="/saveHistoryWithAttachments", method = RequestMethod.POST,consumes ="application/json", produces = "application/json")
     @ResponseBody
-    public ResponseEntity<HistoryDTO> saveHistoryWithAttachments(@RequestBody HistoryDTOStringWithAttachments aHistory){
-        Date date = new Date();
-        HistoryDTOAttachments pHistoryDTO = new HistoryDTOAttachments(aHistory.getId(),aHistory.getType(),aHistory.getUser(),aHistory.getDescription(),date,aHistory.getAttachments());
+    public ResponseEntity<HistoryDTO> saveHistoryWithAttachments(@RequestBody HistoryDTOAttachments aHistory){
         try{
-            return new ResponseEntity<>(historyService.saveHistoryWithAttachments(pHistoryDTO),HttpStatus.OK);
+            return new ResponseEntity<>(historyService.saveHistoryWithAttachments(aHistory),HttpStatus.OK);
         }catch (MyServerException e){
             return new ResponseEntity<>(e.getHeaders(),e.getStatus());
         }

@@ -1,5 +1,6 @@
 package com.uwm.projektz.history.dto;
 
+import com.uwm.projektz.attachment.dto.AttachmentDTOtoAdd;
 import com.uwm.projektz.enums.Type;
 import io.swagger.annotations.ApiModel;
 
@@ -18,19 +19,24 @@ public class HistoryDTOAttachments implements Serializable{
     private Type type;
     private String user;
     private String description;
-    private Date date;
-    private List<Long> attachments;
+    private List<AttachmentDTOtoAdd> attachments;
 
     public HistoryDTOAttachments() {
     }
 
-    public HistoryDTOAttachments(Long id, Type type, String user, String description, Date date, List<Long> attachments) {
+    public HistoryDTOAttachments(Long id, Type type, String user, String description, List<AttachmentDTOtoAdd> attachments) {
         this.id = id;
         this.type = type;
         this.user = user;
         this.description = description;
-        this.date = date;
         this.attachments = attachments;
+    }
+
+    public HistoryDTOAttachments(Long id, Type type, String user, String description) {
+        this.id = id;
+        this.type = type;
+        this.user = user;
+        this.description = description;
     }
 
     public Long getId() {
@@ -65,19 +71,11 @@ public class HistoryDTOAttachments implements Serializable{
         this.description = description;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public List<Long> getAttachments() {
+    public List<AttachmentDTOtoAdd> getAttachments() {
         return attachments;
     }
 
-    public void setAttachments(List<Long> attachments) {
+    public void setAttachments(List<AttachmentDTOtoAdd> attachments) {
         this.attachments = attachments;
     }
 }

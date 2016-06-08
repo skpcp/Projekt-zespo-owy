@@ -38,10 +38,9 @@ public class HistoryOB extends BaseOB {
         this.attachments = attachments;
     }
 
-    public HistoryOB(Type type, String description, Date date) {
+    public HistoryOB(Type type, String description) {
         this.type = type;
         this.description = description;
-        this.date = date;
         this.attachments = new ArrayList<>();
         this.user = null;
     }

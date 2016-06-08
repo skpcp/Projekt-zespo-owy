@@ -39,12 +39,12 @@ public class HistoryConverter {
         if(aHistoryDTO == null){
             return null;
         }
-        return new HistoryOB(aHistoryDTO.getType(),aHistoryDTO.getDescription(),aHistoryDTO.getDate());
+        return new HistoryOB(aHistoryDTO.getType(),aHistoryDTO.getDescription());
     }
 
     public static HistoryOB converterHistoryDTOAttachmentsToHistoryOB(HistoryDTOAttachments aHitoryDTO){
         if(aHitoryDTO == null) return null;
-        return new HistoryOB(aHitoryDTO.getType(),aHitoryDTO.getDescription(),aHitoryDTO.getDate());
+        return new HistoryOB(aHitoryDTO.getType(),aHitoryDTO.getDescription());
     }
 
 

@@ -16,6 +16,5 @@ public interface IProjectRepository extends JpaRepository<ProjectOB,Long> {
     ProjectOB findProjectByName (String aName);
     @Query("SELECT p FROM ProjectOB p WHERE p.priority.name LIKE ?1")
     List<ProjectOB> findProjectByPriority (String aName);
-    @Query("SELECT u.projects FROM UserOB u WHERE u.id = ?1")
-    List<ProjectOB> findUserProjects (Long aId);
+
 }

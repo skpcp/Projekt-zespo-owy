@@ -150,13 +150,13 @@ public class UserServiceImpl implements IUserService {
     public UserDTO updatePermissionsListForUser(UserDTOPermissions aUserDTO) throws MyServerException {
         UserOB user = aUserDTO.getId() == null ? null : userRepository.findOne(aUserDTO.getId());
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        List<PermissionOB> permissions = new ArrayList<>();
+        List<PermissionOB> permissions = user.getPermissions();//pobierz permisions
         if((aUserDTO.getPermissions() == null)) throw new MyServerException("User permissions not found",HttpStatus.NOT_FOUND);
         for(String permissionForUser : aUserDTO.getPermissions())
         {
             PermissionOB permissionOB = permissionRepository.findPermissionByName(permissionForUser);
             if(permissionOB == null) throw  new MyServerException("Permission not found",HttpStatus.NOT_FOUND);
-            permissions.add(permissionOB);
+            if(!permissions.contains(permissionOB)) permissions.add(permissionOB);
         }
         user.setPermissions(permissions);
         return UserConverter.converterUserOBtoUserDTO(userRepository.save(user));
@@ -166,12 +166,12 @@ public class UserServiceImpl implements IUserService {
     public UserDTO updateProjectListForUser(UserDTOProjects aUserDTO) throws MyServerException {
         UserOB user = userRepository.findOne(aUserDTO.getId());
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
-        List<ProjectOB> projects = new ArrayList<>();
+        List<ProjectOB> projects = user.getProjects();
         if(aUserDTO.getProjects()== null) throw new MyServerException("Projects not found",HttpStatus.NOT_FOUND);
         for(ProjectDTOtoAdd project : aUserDTO.getProjects()){
             ProjectOB projectOB  = project.getId() == null ? null :  projectRepository.findOne(project.getId());
             if(projectOB == null) throw new MyServerException("Project not found",HttpStatus.NOT_FOUND);
-            projects.add(projectOB);
+            if(!projects.contains(projectOB)) projects.add(projectOB);
         }
         user.setProjects(projects);
         return UserConverter.converterUserOBtoUserDTO(userRepository.save(user));

@@ -1,5 +1,7 @@
 package com.uwm.projektz.role.dto;
 
+import com.uwm.projektz.permission.dto.PermissionDTO;
+import com.uwm.projektz.permission.dto.PermissionDTOtoAdd;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
@@ -12,9 +14,12 @@ import java.util.List;
 public class RoleDTOCreate implements Serializable
 {
     private String name;
-    private List<String> permissions;
+    private List<PermissionDTOtoAdd> permissions;
 
-    public RoleDTOCreate(String name, List<String> permissions) {
+    public RoleDTOCreate() {
+    }
+
+    public RoleDTOCreate(String name, List<PermissionDTOtoAdd> permissions) {
         this.name = name;
         this.permissions = permissions;
     }
@@ -27,11 +32,11 @@ public class RoleDTOCreate implements Serializable
         this.name = name;
     }
 
-    public List<String> getPermissions() {
+    public List<PermissionDTOtoAdd> getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(List<String> permissions) {
+    public void setPermissions(List<PermissionDTOtoAdd> permissions) {
         this.permissions = permissions;
     }
 }

@@ -2,6 +2,7 @@ package com.uwm.projektz.role.service.impl;
 
 import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.permission.dto.PermissionDTO;
+import com.uwm.projektz.permission.dto.PermissionDTOtoAdd;
 import com.uwm.projektz.permission.ob.PermissionOB;
 import com.uwm.projektz.permission.repository.IPermissionRepository;
 import com.uwm.projektz.role.converter.RoleConverter;
@@ -36,12 +37,12 @@ public class RoleServiceImpl implements IRoleService {
     public RoleDTO saveRole(RoleDTOCreate aRoleDTO) throws MyServerException {
         RoleOB pRoleOB = aRoleDTO.getName() == null ? null : roleRepository.findRoleByName(aRoleDTO.getName());
         //i przy zmianie tez bedzie trzeba wyszukac dlatego robie to od razu
-        List<PermissionOB> permissionOBList = new ArrayList<>();
+        List<PermissionOB> permissionOBList = pRoleOB.getPermissions();
         if(aRoleDTO.getPermissions() == null) throw new MyServerException("Permissions field not found", HttpStatus.NOT_FOUND);
-        for(String permission : aRoleDTO.getPermissions()){
-            PermissionOB permissionOB = permissionRepository.findPermissionByName(permission);
+        for(PermissionDTOtoAdd permission : aRoleDTO.getPermissions()){
+            PermissionOB permissionOB = permission.getId() == null ? null : permissionRepository.findOne(permission.getId());
             if(permissionOB == null) throw new MyServerException("Permission not found",HttpStatus.NOT_FOUND);
-            permissionOBList.add(permissionOB);
+            if(!permissionOBList.contains(permissionOB)) permissionOBList.add(permissionOB);
         }
         if(pRoleOB == null){
             pRoleOB = new RoleOB(aRoleDTO.getName());

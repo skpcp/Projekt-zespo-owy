@@ -35,24 +35,27 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public RoleDTO saveRole(RoleDTOCreate aRoleDTO) throws MyServerException {
-        RoleOB pRoleOB = aRoleDTO.getName() == null ? null : roleRepository.findRoleByName(aRoleDTO.getName());
+        RoleOB pRoleOB = aRoleDTO.getId() == null ? null : roleRepository.findOne(aRoleDTO.getId());
         //i przy zmianie tez bedzie trzeba wyszukac dlatego robie to od razu
+        if(pRoleOB == null)
+        {
+            pRoleOB = new RoleOB(aRoleDTO.getName()); //tworzę nową instancje
+        }
+        else
+        {
+            pRoleOB.setName(aRoleDTO.getName());//zmien nazwe
+        }
         List<PermissionOB> permissionOBList = pRoleOB.getPermissions();
         if(aRoleDTO.getPermissions() == null) throw new MyServerException("Permissions field not found", HttpStatus.NOT_FOUND);
+
+        //czy Rola jest czy jej nie ma permission się należy
         for(PermissionDTOtoAdd permission : aRoleDTO.getPermissions()){
             PermissionOB permissionOB = permission.getId() == null ? null : permissionRepository.findOne(permission.getId());
             if(permissionOB == null) throw new MyServerException("Permission not found",HttpStatus.NOT_FOUND);
             if(!permissionOBList.contains(permissionOB)) permissionOBList.add(permissionOB);
         }
-        if(pRoleOB == null){
-            pRoleOB = new RoleOB(aRoleDTO.getName());
-            pRoleOB.setPermissions(permissionOBList);
-            return RoleConverter.converterRoleOBtoDTO(roleRepository.save(pRoleOB));
-        }
-        //edycja
-        pRoleOB.setName(aRoleDTO.getName());
         pRoleOB.setPermissions(permissionOBList);
-        return RoleConverter.converterRoleOBtoDTO(pRoleOB);
+        return RoleConverter.converterRoleOBtoDTO(roleRepository.save(pRoleOB));
     }
 
     @Override

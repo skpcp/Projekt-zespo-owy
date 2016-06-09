@@ -13,15 +13,25 @@ import java.util.List;
 @ApiModel
 public class RoleDTOCreate implements Serializable
 {
+    private Long id;
     private String name;
     private List<PermissionDTOtoAdd> permissions;
 
     public RoleDTOCreate() {
     }
 
-    public RoleDTOCreate(String name, List<PermissionDTOtoAdd> permissions) {
+    public RoleDTOCreate(Long id, String name, List<PermissionDTOtoAdd> permissions) {
+        this.id = id;
         this.name = name;
         this.permissions = permissions;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

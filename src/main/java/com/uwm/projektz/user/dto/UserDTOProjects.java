@@ -1,6 +1,7 @@
 package com.uwm.projektz.user.dto;
 
 import com.uwm.projektz.project.dto.ProjectDTO;
+import com.uwm.projektz.project.dto.ProjectDTOtoAdd;
 import io.swagger.annotations.ApiModel;
 
 import java.io.Serializable;
@@ -13,12 +14,12 @@ import java.util.List;
 @ApiModel
 public class UserDTOProjects implements Serializable {
     private Long id;
-    private List<String> projects;
+    private List<ProjectDTOtoAdd> projects;
 
     public UserDTOProjects() {
     }
 
-    public UserDTOProjects(Long id, List<String> projects) {
+    public UserDTOProjects(Long id, List<ProjectDTOtoAdd> projects) {
         this.id = id;
         this.projects = projects;
     }
@@ -31,11 +32,11 @@ public class UserDTOProjects implements Serializable {
         this.id = id;
     }
 
-    public List<String> getProjects() {
+    public List<ProjectDTOtoAdd> getProjects() {
         return projects;
     }
 
-    public void setProjects(List<String> projects) {
+    public void setProjects(List<ProjectDTOtoAdd> projects) {
         this.projects = projects;
     }
 }

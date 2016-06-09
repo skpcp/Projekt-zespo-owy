@@ -3,6 +3,7 @@ package com.uwm.projektz.user.service.impl;
 import com.uwm.projektz.MyServerException;
 import com.uwm.projektz.permission.ob.PermissionOB;
 import com.uwm.projektz.permission.repository.IPermissionRepository;
+import com.uwm.projektz.project.dto.ProjectDTOtoAdd;
 import com.uwm.projektz.project.ob.ProjectOB;
 import com.uwm.projektz.project.repository.IProjectRepository;
 import com.uwm.projektz.role.ob.RoleOB;
@@ -167,8 +168,8 @@ public class UserServiceImpl implements IUserService {
         if(user == null) throw new MyServerException("User not found",HttpStatus.NOT_FOUND);
         List<ProjectOB> projects = new ArrayList<>();
         if(aUserDTO.getProjects()== null) throw new MyServerException("Projects not found",HttpStatus.NOT_FOUND);
-        for(String  project : aUserDTO.getProjects()){
-            ProjectOB projectOB  = projectRepository.findProjectByName(project);
+        for(ProjectDTOtoAdd project : aUserDTO.getProjects()){
+            ProjectOB projectOB  = project.getId() == null ? null :  projectRepository.findOne(project.getId());
             if(projectOB == null) throw new MyServerException("Project not found",HttpStatus.NOT_FOUND);
             projects.add(projectOB);
         }

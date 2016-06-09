@@ -66,7 +66,7 @@ public class TicketController {
 
     @RequestMapping(value="/getTicketsByPriority/{priority.id}",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<List<TicketDTO>> findTicketsByPriority(@PathVariable Long aId){
+    public ResponseEntity<List<TicketDTO>> findTicketsByPriority(@PathVariable("priority.id") Long aId){
         return new ResponseEntity<>(ticketService.findTicketsByPriority(aId),HttpStatus.OK);
     }
 
